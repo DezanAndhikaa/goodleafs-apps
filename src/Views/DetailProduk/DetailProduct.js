@@ -15,6 +15,20 @@ export default class DetailProduct extends Component {
     };
   }
 
+  addQty = () => {
+    this.setState({
+      qty: this.state.qty + 1,
+    });
+  };
+
+  decQty = () => {
+    if (this.state.qty > 1) {
+      this.setState({
+        qty: this.state.qty - 1,
+      });
+    }
+  };
+
   render() {
     return (
       <View style={style.wrapper}>
@@ -50,9 +64,13 @@ export default class DetailProduct extends Component {
             </View>
 
             <View style={style.quantityItem}>
-              <Text style={style.incrementButton}>+</Text>
+              <Text style={style.incrementButton} onPress={this.addQty}>
+                +
+              </Text>
               <Text style={style.totalQty}>{this.state.qty}</Text>
-              <Text style={style.decrementButton}>-</Text>
+              <Text style={style.decrementButton} onPress={this.decQty}>
+                -
+              </Text>
 
               <View style={style.productPrice}>
                 <Text style={style.priceWord}>Rp 5,000</Text>
@@ -67,7 +85,15 @@ export default class DetailProduct extends Component {
           <View style={style.wrapperReview}>
             <View style={style.wrapperReviewTitle}>
               <Text style={style.ulasanTitle}>Ulasan Tentang Product</Text>
-              <Text style={style.lihatSemuaTitle}>Lihat Semua</Text>
+              <Text
+                style={style.lihatSemuaTitle}
+                onPress={() =>
+                  this.props.navigation.navigate("Reviews", {
+                    namaProduct: "Jeruk Manis",
+                  })
+                }>
+                Lihat Semua
+              </Text>
             </View>
 
             <ReviewCard />

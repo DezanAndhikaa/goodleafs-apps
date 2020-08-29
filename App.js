@@ -5,6 +5,7 @@ import MainMenu from "./src/Views/MainMenu/MainMenu";
 import SignIn from "./src/Views/Login/Login";
 import SignUp from "./src/Views/SignUp/SignUp";
 import DetailProduct from "./src/Views/DetailProduk/DetailProduct";
+import Reviews from "./src/Views/Reviews/Reviews";
 
 const navigator = createStackNavigator(
   {
@@ -13,6 +14,7 @@ const navigator = createStackNavigator(
     SignIn: SignIn,
     SignUp: SignUp,
     DetailProduct: DetailProduct,
+    Reviews: Reviews,
   },
   {
     initialRouteName: "LoadingScreen",

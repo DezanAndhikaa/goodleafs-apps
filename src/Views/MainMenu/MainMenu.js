@@ -16,6 +16,7 @@ import Apel from "../../../assets/img/products/Apel.png";
 import Salad from "../../../assets/img/products/salad.png";
 import Kubis from "../../../assets/img/products/Kubis.png";
 import Kategori from "../../Components/Kategori/Kategori";
+import Navbar from "../../Components/Navbar/Navbar";
 
 const WelcomeWord = (words, second) => {
   return (
@@ -30,121 +31,131 @@ export default class MainMenu extends Component {
   constructor(props) {
     super(props);
   }
-
-  componentDidMount() {}
   render() {
     return (
-      <ScrollView style={style.scrollParent}>
-        <View>
-          <StatusBar
-            barStyle="dark-content"
-            backgroundColor="#FFF"
-            hidden={false}
-          />
+      <View style={{ flex: 1, backgroundColor: "#FFF" }}>
+        <ScrollView style={style.scrollParent}>
+          <View>
+            <StatusBar
+              barStyle="dark-content"
+              backgroundColor="#FFF"
+              hidden={false}
+            />
 
-          <MainBar />
-          {WelcomeWord("Buah dan Sayuran Segar", "Setiap Hari")}
-          <Image source={Banner} style={style.bannerImage} />
-          <Text style={style.headerWord}> Deal of the day! </Text>
-          <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-            <View style={style.containerProduct}>
-              <TouchableOpacity
-                onPress={() =>
-                  this.props.navigation.navigate("DetailProduct", {
-                    image: Jeruk,
-                  })
-                }>
+            <MainBar />
+            {WelcomeWord("Buah dan Sayuran Segar", "Setiap Hari")}
+            <Image source={Banner} style={style.bannerImage} />
+            <Text style={style.headerWord}> Deal of the day! </Text>
+            <ScrollView
+              horizontal={true}
+              showsHorizontalScrollIndicator={false}>
+              <View style={style.containerProduct}>
+                <TouchableOpacity
+                  onPress={() =>
+                    this.props.navigation.navigate("DetailProduct", {
+                      image: Jeruk,
+                    })
+                  }>
+                  <ProductCard
+                    color="#FFBF2E"
+                    image={Jeruk}
+                    nameProduct="Jeruk Manis"
+                    prices="12000"
+                  />
+                </TouchableOpacity>
+
+                <ProductCard
+                  color="#869428"
+                  image={Apel}
+                  nameProduct="Apel Medan"
+                  prices="5000"
+                />
+                <ProductCard
+                  color="#D0DD8D"
+                  image={Kubis}
+                  nameProduct="Kubis Segar"
+                  prices="9000"
+                />
+              </View>
+            </ScrollView>
+            <Text style={style.headerWord}> Kategori </Text>
+            <ScrollView
+              horizontal={true}
+              showsHorizontalScrollIndicator={false}>
+              <View style={{ flexDirection: "row" }}>
+                <View style={style.containerKategori}>
+                  <Kategori image={Salad} title="Sayuran Hidroponik" />
+                  <Kategori image={Salad} title="Makanan Dingin" />
+                </View>
+
+                <View style={style.containerKategori}>
+                  <Kategori image={Salad} title="Buah-buahan" />
+                  <Kategori image={Salad} title="Sayuran Organik" />
+                </View>
+
+                <View style={style.containerKategori}>
+                  <Kategori image={Salad} title="Sayuran Hidroponik" />
+                  <Kategori image={Salad} title="Sayuran Hidroponik" />
+                </View>
+              </View>
+            </ScrollView>
+
+            <Text style={style.headerWord}> Makanan Dingin </Text>
+            <ScrollView
+              horizontal={true}
+              showsHorizontalScrollIndicator={false}>
+              <View style={style.containerProduct}>
                 <ProductCard
                   color="#FFBF2E"
                   image={Jeruk}
                   nameProduct="Jeruk Manis"
                   prices="12000"
                 />
-              </TouchableOpacity>
-
-              <ProductCard
-                color="#869428"
-                image={Apel}
-                nameProduct="Apel Medan"
-                prices="5000"
-              />
-              <ProductCard
-                color="#D0DD8D"
-                image={Kubis}
-                nameProduct="Kubis Segar"
-                prices="9000"
-              />
-            </View>
-          </ScrollView>
-          <Text style={style.headerWord}> Kategori </Text>
-          <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-            <View style={{ flexDirection: "row" }}>
-              <View style={style.containerKategori}>
-                <Kategori image={Salad} title="Sayuran Hidroponik" />
-                <Kategori image={Salad} title="Makanan Dingin" />
+                <ProductCard
+                  color="#869428"
+                  image={Apel}
+                  nameProduct="Apel Medan"
+                  prices="5000"
+                />
+                <ProductCard
+                  color="#D0DD8D"
+                  image={Kubis}
+                  nameProduct="Kubis Segar"
+                  prices="9000"
+                />
               </View>
+            </ScrollView>
 
-              <View style={style.containerKategori}>
-                <Kategori image={Salad} title="Buah-buahan" />
-                <Kategori image={Salad} title="Sayuran Organik" />
+            <Text style={style.headerWord}> Sayuran Organik </Text>
+            <ScrollView
+              horizontal={true}
+              showsHorizontalScrollIndicator={false}>
+              <View style={style.containerProduct}>
+                <ProductCard
+                  color="#FFBF2E"
+                  image={Jeruk}
+                  nameProduct="Jeruk Manis"
+                  prices="12000"
+                />
+                <ProductCard
+                  color="#869428"
+                  image={Apel}
+                  nameProduct="Apel Medan"
+                  prices="5000"
+                />
+                <ProductCard
+                  color="#D0DD8D"
+                  image={Kubis}
+                  nameProduct="Kubis Segar"
+                  prices="9000"
+                />
               </View>
+            </ScrollView>
+          </View>
+        </ScrollView>
 
-              <View style={style.containerKategori}>
-                <Kategori image={Salad} title="Sayuran Hidroponik" />
-                <Kategori image={Salad} title="Sayuran Hidroponik" />
-              </View>
-            </View>
-          </ScrollView>
-
-          <Text style={style.headerWord}> Makanan Dingin </Text>
-          <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-            <View style={style.containerProduct}>
-              <ProductCard
-                color="#FFBF2E"
-                image={Jeruk}
-                nameProduct="Jeruk Manis"
-                prices="12000"
-              />
-              <ProductCard
-                color="#869428"
-                image={Apel}
-                nameProduct="Apel Medan"
-                prices="5000"
-              />
-              <ProductCard
-                color="#D0DD8D"
-                image={Kubis}
-                nameProduct="Kubis Segar"
-                prices="9000"
-              />
-            </View>
-          </ScrollView>
-
-          <Text style={style.headerWord}> Sayuran Organik </Text>
-          <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-            <View style={style.containerProduct}>
-              <ProductCard
-                color="#FFBF2E"
-                image={Jeruk}
-                nameProduct="Jeruk Manis"
-                prices="12000"
-              />
-              <ProductCard
-                color="#869428"
-                image={Apel}
-                nameProduct="Apel Medan"
-                prices="5000"
-              />
-              <ProductCard
-                color="#D0DD8D"
-                image={Kubis}
-                nameProduct="Kubis Segar"
-                prices="9000"
-              />
-            </View>
-          </ScrollView>
-        </View>
-      </ScrollView>
+        <Navbar />
+      </View>
     );
   }
 }
