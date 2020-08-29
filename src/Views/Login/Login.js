@@ -11,23 +11,10 @@ import HeaderSign from "../../Components/Login/Header";
 import Sign from "../../Components/Login/Sign";
 import FbButton from "../../Components/Login/FacebookButton";
 
-const LoginProcess = () => {
-  navigation.dispatch((state) => {
-    // Remove the home route from the stack
-    const routes = state.routes.filter((r) => r.name !== "Loading");
-
-    return CommonActions.reset({
-      ...state,
-      routes,
-      index: routes.length - 1,
-    });
-  });
-};
-
 const Login = ({ navigation } = props) => {
   return (
     <View style={style.bodys}>
-      <StatusBar barStyle="dark-content" />
+      <StatusBar barStyle="dark-content" backgroundColor="#FFF" />
       <HeaderSign />
       <Sign status="signin" navigation={navigation} />
       <View style={style.fbButton}>

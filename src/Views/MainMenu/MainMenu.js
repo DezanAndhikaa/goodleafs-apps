@@ -1,5 +1,12 @@
 import React, { Component } from "react";
-import { Text, StyleSheet, View, StatusBar, Image } from "react-native";
+import {
+  Text,
+  StyleSheet,
+  View,
+  StatusBar,
+  Image,
+  TouchableOpacity,
+} from "react-native";
 import MainBar from "../../Components/MainBar/MainBar";
 import Banner from "../../../assets/img/banner.png";
 import ProductCard from "../../Components/ProductCard/ProductCard";
@@ -20,6 +27,10 @@ const WelcomeWord = (words, second) => {
 };
 
 export default class MainMenu extends Component {
+  constructor(props) {
+    super(props);
+  }
+
   componentDidMount() {}
   render() {
     return (
@@ -37,12 +48,20 @@ export default class MainMenu extends Component {
           <Text style={style.headerWord}> Deal of the day! </Text>
           <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
             <View style={style.containerProduct}>
-              <ProductCard
-                color="#FFBF2E"
-                image={Jeruk}
-                nameProduct="Jeruk Manis"
-                prices="12000"
-              />
+              <TouchableOpacity
+                onPress={() =>
+                  this.props.navigation.navigate("DetailProduct", {
+                    image: Jeruk,
+                  })
+                }>
+                <ProductCard
+                  color="#FFBF2E"
+                  image={Jeruk}
+                  nameProduct="Jeruk Manis"
+                  prices="12000"
+                />
+              </TouchableOpacity>
+
               <ProductCard
                 color="#869428"
                 image={Apel}

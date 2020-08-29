@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "goodleafs-app",
-    "slug": "goodleafs-app",
+    "name": "Goodleafs",
+    "slug": "goodleafs",
     "platforms": [
       "ios",
       "android",
@@ -23,6 +23,7 @@
     ],
     "ios": {
       "supportsTablet": true
-    }
+    },
+    "description": "Dev state goodleafs apps"
   }
 }
