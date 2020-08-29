@@ -1,32 +1,13 @@
 import React, { Component } from "react";
 import { Text, View, StyleSheet, TouchableOpacity, Image } from "react-native";
 import ReviewCard from "../../Components/ReviewCard/ReviewCard";
-import BackLogo from "../../../assets/img/products/BackArrowBlack.png";
+import Headers from "../../Components/Header/Header";
 
 export default class Reviews extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
       <View style={style.body}>
-        <TouchableOpacity
-          style={{ flexDirection: "row", marginBottom: 24 }}
-          onPress={() => this.props.navigation.goBack()}>
-          <Image
-            source={BackLogo}
-            style={{
-              resizeMode: "contain",
-              width: 25,
-              height: 25,
-              marginTop: -2,
-              marginLeft: -5,
-            }}
-          />
-          <Text style={style.backTextStyle}>Kembali</Text>
-        </TouchableOpacity>
-
+        <Headers navigation={this.props.navigation} />
         <Text style={style.title}>
           Ulasan {"\n"}
           {this.props.navigation.getParam("namaProduct")}

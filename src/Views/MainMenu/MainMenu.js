@@ -154,7 +154,7 @@ export default class MainMenu extends Component {
           </View>
         </ScrollView>
 
-        <Navbar />
+        <Navbar navigation={this.props.navigation} />
       </View>
     );
   }
