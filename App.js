@@ -7,6 +7,7 @@ import SignUp from "./src/Views/SignUp/SignUp";
 import DetailProduct from "./src/Views/DetailProduk/DetailProduct";
 import Reviews from "./src/Views/Reviews/Reviews";
 import Discount from "./src/Views/Discount/Discount";
+import Wishlist from "./src/Views/Wishlist/Wishlist";
 
 const navigator = createStackNavigator(
   {
@@ -17,6 +18,7 @@ const navigator = createStackNavigator(
     DetailProduct: DetailProduct,
     Reviews: Reviews,
     Discount: Discount,
+    Wishlist: Wishlist,
   },
   {
     initialRouteName: "LoadingScreen",
