@@ -12,6 +12,8 @@ import Account from "./src/Views/Account/Account";
 import Cart from "./src/Views/Cart/Cart";
 import ListOrders from "./src/Views/Orders/ListOrders";
 import DetailOrder from "./src/Views/Orders/DetailOrder";
+import Search from "./src/Views/Search/Search";
+import DetailSearch from "./src/Views/DetailSearch/DetailSearch";
 
 const navigator = createStackNavigator(
   {
@@ -27,6 +29,8 @@ const navigator = createStackNavigator(
     Cart: Cart,
     ListOrders: ListOrders,
     DetailOrder: DetailOrder,
+    Search: Search,
+    DetailSearch: DetailSearch,
   },
   {
     initialRouteName: "LoadingScreen",

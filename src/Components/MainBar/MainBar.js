@@ -13,7 +13,12 @@ export default MainBar = ({ navigation } = props) => {
         <Image source={cartLogo} style={style.icoStyle} />
       </TouchableOpacity>
 
-      <Image source={searchLogo} style={style.icosearch} />
+      <TouchableOpacity
+        onPress={() => {
+          navigation.navigate("Search");
+        }}>
+        <Image source={searchLogo} style={style.icosearch} />
+      </TouchableOpacity>
     </View>
   );
 };

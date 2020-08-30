@@ -25,14 +25,14 @@ const data = [
   },
 ];
 
-export default class Wishlist extends Component {
+export default class DetailSearch extends Component {
   render() {
     return (
       <View style={style.body}>
         <Headers navigation={this.props.navigation} />
         <Text style={style.title}>
-          Daftar {"\n"}
-          WishList
+          Pencarian{"\n"}
+          Produk
         </Text>
         <View style={style.wrapperBody}>
           {data.map((data, index) => (
