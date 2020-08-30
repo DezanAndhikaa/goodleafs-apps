@@ -9,7 +9,7 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 export default Navbar = ({ navigation } = props) => {
   return (
     <View style={style.wrapperNavbar}>
-      <TouchableOpacity onPress={() => navigation.navigate("Home")}>
+      <TouchableOpacity onPress={() => navigation.navigate("MainMenu")}>
         <Image source={HomeNav} style={style.imageDiskon} />
       </TouchableOpacity>
 
@@ -21,7 +21,12 @@ export default Navbar = ({ navigation } = props) => {
         <Image source={WishlistNav} style={style.image} />
       </TouchableOpacity>
 
-      <TouchableOpacity onPress={() => navigation.navigate("Account")}>
+      <TouchableOpacity
+        onPress={() =>
+          navigation.navigate("Account", {
+            namaAccount: "Dezan Andhika",
+          })
+        }>
         <Image source={AkunNav} style={style.image} />
       </TouchableOpacity>
     </View>
