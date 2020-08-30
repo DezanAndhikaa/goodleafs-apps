@@ -10,6 +10,8 @@ import Discount from "./src/Views/Discount/Discount";
 import Wishlist from "./src/Views/Wishlist/Wishlist";
 import Account from "./src/Views/Account/Account";
 import Cart from "./src/Views/Cart/Cart";
+import ListOrders from "./src/Views/Orders/ListOrders";
+import DetailOrder from "./src/Views/Orders/DetailOrder";
 
 const navigator = createStackNavigator(
   {
@@ -23,6 +25,8 @@ const navigator = createStackNavigator(
     Wishlist: Wishlist,
     Account: Account,
     Cart: Cart,
+    ListOrders: ListOrders,
+    DetailOrder: DetailOrder,
   },
   {
     initialRouteName: "LoadingScreen",

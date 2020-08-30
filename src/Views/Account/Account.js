@@ -38,20 +38,27 @@ export default class Account extends Component {
             </TouchableOpacity>
           </View>
 
-          <View style={style.wrapperStatus}>
-            <View style={style.styleBox}>
-              <Text style={style.qty}>42</Text>
-              <Text style={style.qtyOrder}>Pesanan Diterima</Text>
+          <TouchableOpacity
+            onPress={() => this.props.navigation.navigate("ListOrders")}
+            style={{
+              height: 150,
+              marginBottom: -50,
+            }}>
+            <View style={style.wrapperStatus}>
+              <View style={style.styleBox}>
+                <Text style={style.qty}>42</Text>
+                <Text style={style.qtyOrder}>Pesanan Diterima</Text>
+              </View>
+              <View style={style.styleBox2}>
+                <Text style={style.qty}>12</Text>
+                <Text style={style.qtyOrder}>Pesanan Diproses</Text>
+              </View>
+              <View style={style.styleBox3}>
+                <Text style={style.qty}>2</Text>
+                <Text style={style.qtyOrder}>Pesanan Dikirim</Text>
+              </View>
             </View>
-            <View style={style.styleBox2}>
-              <Text style={style.qty}>12</Text>
-              <Text style={style.qtyOrder}>Pesanan Diproses</Text>
-            </View>
-            <View style={style.styleBox3}>
-              <Text style={style.qty}>2</Text>
-              <Text style={style.qtyOrder}>Pesanan Dikirim</Text>
-            </View>
-          </View>
+          </TouchableOpacity>
 
           <View style={style.verifiedAccount}>
             <Image source={VerifiedLogo} />
