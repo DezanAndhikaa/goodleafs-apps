@@ -41,8 +41,8 @@ export default class Wishlist extends Component {
           WishList
         </Text>
         <View style={style.wrapperBody}>
-          {data.map((data) => (
-            <View style={style.styleItem}>
+          {data.map((data, index) => (
+            <View style={style.styleItem} key={index}>
               <ProductCard
                 color={data.color}
                 nameProduct={data.nameProduct}

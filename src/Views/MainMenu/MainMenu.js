@@ -42,7 +42,7 @@ export default class MainMenu extends Component {
               hidden={false}
             />
 
-            <MainBar />
+            <MainBar navigation={this.props.navigation} />
             {WelcomeWord("Buah dan Sayuran Segar", "Setiap Hari")}
             <Image source={Banner} style={style.bannerImage} />
             <Text style={style.headerWord}> Deal of the day! </Text>

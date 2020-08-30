@@ -3,10 +3,16 @@ import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import searchLogo from "../../../assets/img/search.png";
 import cartLogo from "../../../assets/img/shopping.png";
 
-export default MainBar = () => {
+export default MainBar = ({ navigation } = props) => {
   return (
     <View style={style.mainBarWrap}>
-      <Image source={cartLogo} style={style.icoStyle} />
+      <TouchableOpacity
+        onPress={() => {
+          navigation.navigate("Cart");
+        }}>
+        <Image source={cartLogo} style={style.icoStyle} />
+      </TouchableOpacity>
+
       <Image source={searchLogo} style={style.icosearch} />
     </View>
   );
