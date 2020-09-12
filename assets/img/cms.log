@@ -1,0 +1,151 @@
+﻿[2020-08-29 18:45:15 +00:00] INFORMATION : Starting host 
+[2020-08-29 18:45:16 +00:00] WARNING : Storing keys in a directory '/root/.aspnet/DataProtection-Keys' that may not be persisted outside of the container. Protected data will be unavailable when container is destroyed. 
+[2020-08-29 18:45:17 +00:00] WARNING : No XML encryptor configured. Key {f077e536-da17-4bec-9102-86e19ae88da8} may be persisted to storage in unencrypted form. 
+[2020-08-29 18:45:17 +00:00] INFORMATION : KafkaConsumerService is runing 
+[2020-08-29 18:45:17 +00:00] INFORMATION : WorkerService is runing 
+[2020-08-29 18:45:17 +00:00] INFORMATION : KafkaConsumerService utportal_equipmentmonitoringservice_equipment is runing 
+Hosting environment: Production 
+Content root path: /app 
+Now listening on: http://[::]:8080 
+Application started. Press Ctrl+C to shut down. 
+[2020-08-31 03:20:18 +00:00] WARNING : Work Order have missing coloumn that required 
+[2020-08-31 03:20:18 +00:00] WARNING : Work Order have missing coloumn that required 
+[2020-08-31 03:20:18 +00:00] WARNING : Work Order have missing coloumn that required 
+[2020-08-31 03:20:18 +00:00] WARNING : Work Order have missing coloumn that required 
+[2020-08-31 03:20:18 +00:00] WARNING : Work Order have missing coloumn that required 
+[2020-08-31 03:20:18 +00:00] WARNING : Work Order have missing coloumn that required 
+[2020-08-31 03:20:18 +00:00] WARNING : Work Order have missing coloumn that required 
+[2020-08-31 03:20:19 +00:00] WARNING : Work Order have missing coloumn that required 
+[2020-08-31 03:20:19 +00:00] WARNING : Work Order have missing coloumn that required 
+[2020-08-31 03:20:19 +00:00] WARNING : Work Order have missing coloumn that required 
+[2020-08-31 03:20:19 +00:00] WARNING : Work Order have missing coloumn that required 
+[2020-08-31 03:20:19 +00:00] WARNING : Work Order have missing coloumn that required 
+[2020-08-31 03:20:19 +00:00] WARNING : Work Order have missing coloumn that required 
+[2020-08-31 03:20:19 +00:00] WARNING : Work Order have missing coloumn that required 
+[2020-08-31 03:20:19 +00:00] WARNING : Work Order have missing coloumn that required 
+[2020-08-31 03:20:19 +00:00] WARNING : Work Order have missing coloumn that required 
+[2020-08-31 03:20:19 +00:00] WARNING : Work Order have missing coloumn that required 
+[2020-08-31 03:20:19 +00:00] WARNING : Work Order have missing coloumn that required 
+[2020-08-31 03:20:19 +00:00] WARNING : Work Order have missing coloumn that required 
+[2020-08-31 03:20:19 +00:00] WARNING : Work Order have missing coloumn that required 
+[2020-08-31 03:20:19 +00:00] WARNING : Work Order have missing coloumn that required 
+[2020-08-31 03:20:19 +00:00] WARNING : Work Order have missing coloumn that required 
+[2020-08-31 03:20:20 +00:00] WARNING : Work Order have missing coloumn that required 
+[2020-08-31 03:20:20 +00:00] WARNING : Work Order have missing coloumn that required 
+[2020-08-31 03:20:20 +00:00] WARNING : Work Order have missing coloumn that required 
+[2020-08-31 03:20:20 +00:00] WARNING : Work Order have missing coloumn that required 
+[2020-08-31 03:20:20 +00:00] WARNING : Work Order have missing coloumn that required 
+[2020-08-31 03:20:20 +00:00] WARNING : Work Order have missing coloumn that required 
+[2020-08-31 03:20:20 +00:00] ERROR : Error when connection to FTP : Sequence contains more than one element 
+[2020-08-31 03:20:20 +00:00] INFORMATION : Sending message to MsTeam with color #eb090d 
+[2020-08-31 03:20:21 +00:00] WARNING : Work Order have missing coloumn that required 
+[2020-08-31 03:20:21 +00:00] WARNING : Work Order have missing coloumn that required 
+[2020-08-31 03:20:21 +00:00] WARNING : Work Order have missing coloumn that required 
+[2020-08-31 03:20:22 +00:00] WARNING : Work Order have missing coloumn that required 
+[2020-08-31 03:20:22 +00:00] WARNING : Work Order have missing coloumn that required 
+[2020-08-31 03:20:22 +00:00] ERROR : Error when connection to FTP : Sequence contains more than one element 
+[2020-08-31 03:20:22 +00:00] INFORMATION : Sending message to MsTeam with color #eb090d 
+[2020-08-31 03:20:22 +00:00] WARNING : Work Order have missing coloumn that required 
+[2020-08-31 03:20:22 +00:00] WARNING : Work Order have missing coloumn that required 
+[2020-08-31 03:20:22 +00:00] ERROR : Error when connection to FTP : Sequence contains more than one element 
+[2020-08-31 03:20:22 +00:00] INFORMATION : Sending message to MsTeam with color #eb090d 
+[2020-08-31 03:20:23 +00:00] WARNING : Work Order have missing coloumn that required 
+[2020-08-31 03:20:23 +00:00] WARNING : Work Order have missing coloumn that required 
+[2020-08-31 03:20:23 +00:00] ERROR : Error when connection to FTP : Sequence contains more than one element 
+[2020-08-31 03:20:23 +00:00] INFORMATION : Sending message to MsTeam with color #eb090d 
+[2020-08-31 03:20:24 +00:00] WARNING : Work Order have missing coloumn that required 
+[2020-08-31 03:20:24 +00:00] WARNING : Work Order have missing coloumn that required 
+[2020-08-31 03:20:24 +00:00] WARNING : Work Order have missing coloumn that required 
+[2020-08-31 03:20:24 +00:00] ERROR : Error when connection to FTP : Sequence contains more than one element 
+[2020-08-31 03:20:24 +00:00] INFORMATION : Sending message to MsTeam with color #eb090d 
+[2020-08-31 03:20:25 +00:00] WARNING : Work Order have missing coloumn that required 
+[2020-08-31 03:20:25 +00:00] WARNING : Work Order have missing coloumn that required 
+[2020-08-31 03:20:25 +00:00] ERROR : Error when connection to FTP : Sequence contains more than one element 
+[2020-08-31 03:20:25 +00:00] INFORMATION : Sending message to MsTeam with color #eb090d 
+[2020-08-31 03:20:25 +00:00] WARNING : Work Order have missing coloumn that required 
+[2020-08-31 03:20:25 +00:00] WARNING : Work Order have missing coloumn that required 
+[2020-08-31 03:20:25 +00:00] ERROR : Error when connection to FTP : Sequence contains more than one element 
+[2020-08-31 03:20:25 +00:00] INFORMATION : Sending message to MsTeam with color #eb090d 
+[2020-08-31 03:20:26 +00:00] WARNING : Work Order have missing coloumn that required 
+[2020-08-31 03:20:26 +00:00] ERROR : Error when connection to FTP : Sequence contains more than one element 
+[2020-08-31 03:20:26 +00:00] INFORMATION : Sending message to MsTeam with color #eb090d 
+[2020-08-31 03:20:26 +00:00] ERROR : Error when connection to FTP : Sequence contains more than one element 
+[2020-08-31 03:20:26 +00:00] INFORMATION : Sending message to MsTeam with color #eb090d 
+[2020-08-31 03:20:27 +00:00] ERROR : Error when connection to FTP : Sequence contains more than one element 
+[2020-08-31 03:20:27 +00:00] INFORMATION : Sending message to MsTeam with color #eb090d 
+[2020-08-31 03:20:28 +00:00] WARNING : Work Order have missing coloumn that required 
+[2020-08-31 03:20:28 +00:00] WARNING : Work Order have missing coloumn that required 
+[2020-08-31 03:20:28 +00:00] ERROR : Error when connection to FTP : Sequence contains more than one element 
+[2020-08-31 03:20:28 +00:00] INFORMATION : Sending message to MsTeam with color #eb090d 
+[2020-08-31 03:20:28 +00:00] WARNING : Work Order have missing coloumn that required 
+[2020-08-31 03:20:28 +00:00] WARNING : Work Order have missing coloumn that required 
+[2020-08-31 03:20:28 +00:00] WARNING : Work Order have missing coloumn that required 
+[2020-08-31 03:20:28 +00:00] ERROR : Error when connection to FTP : Sequence contains more than one element 
+[2020-08-31 03:20:28 +00:00] INFORMATION : Sending message to MsTeam with color #eb090d 
+[2020-08-31 03:20:29 +00:00] WARNING : Work Order have missing coloumn that required 
+[2020-08-31 03:20:29 +00:00] WARNING : Work Order have missing coloumn that required 
+[2020-08-31 03:20:29 +00:00] WARNING : Work Order have missing coloumn that required 
+[2020-08-31 03:20:29 +00:00] ERROR : Error when connection to FTP : Sequence contains more than one element 
+[2020-08-31 03:20:29 +00:00] INFORMATION : Sending message to MsTeam with color #eb090d 
+[2020-08-31 03:20:29 +00:00] WARNING : Work Order have missing coloumn that required 
+[2020-08-31 03:20:29 +00:00] WARNING : Work Order have missing coloumn that required 
+[2020-08-31 03:20:29 +00:00] WARNING : Work Order have missing coloumn that required 
+[2020-08-31 03:20:29 +00:00] ERROR : Error when connection to FTP : Sequence contains more than one element 
+[2020-08-31 03:20:29 +00:00] INFORMATION : Sending message to MsTeam with color #eb090d 
+[2020-08-31 03:20:30 +00:00] WARNING : Work Order have missing coloumn that required 
+[2020-08-31 03:20:30 +00:00] ERROR : Error when connection to FTP : Sequence contains more than one element 
+[2020-08-31 03:20:30 +00:00] INFORMATION : Sending message to MsTeam with color #eb090d 
+[2020-08-31 03:20:30 +00:00] WARNING : Work Order have missing coloumn that required 
+[2020-08-31 03:20:30 +00:00] ERROR : Error when connection to FTP : Sequence contains more than one element 
+[2020-08-31 03:20:30 +00:00] INFORMATION : Sending message to MsTeam with color #eb090d 
+[2020-08-31 03:20:31 +00:00] WARNING : Work Order have missing coloumn that required 
+[2020-08-31 03:20:31 +00:00] ERROR : Error when connection to FTP : Sequence contains more than one element 
+[2020-08-31 03:20:31 +00:00] INFORMATION : Sending message to MsTeam with color #eb090d 
+[2020-08-31 03:20:31 +00:00] WARNING : Work Order have missing coloumn that required 
+[2020-08-31 03:20:31 +00:00] ERROR : Error when connection to FTP : Sequence contains more than one element 
+[2020-08-31 03:20:31 +00:00] INFORMATION : Sending message to MsTeam with color #eb090d 
+[2020-08-31 03:20:32 +00:00] WARNING : Work Order have missing coloumn that required 
+[2020-08-31 03:20:32 +00:00] ERROR : Error when connection to FTP : Sequence contains more than one element 
+[2020-08-31 03:20:32 +00:00] INFORMATION : Sending message to MsTeam with color #eb090d 
+[2020-08-31 03:20:33 +00:00] WARNING : Work Order have missing coloumn that required 
+[2020-08-31 03:20:33 +00:00] ERROR : Error when connection to FTP : Sequence contains more than one element 
+[2020-08-31 03:20:33 +00:00] INFORMATION : Sending message to MsTeam with color #eb090d 
+[2020-08-31 03:20:34 +00:00] WARNING : Work Order have missing coloumn that required 
+[2020-08-31 03:20:34 +00:00] ERROR : Error when connection to FTP : Sequence contains more than one element 
+[2020-08-31 03:20:34 +00:00] INFORMATION : Sending message to MsTeam with color #eb090d 
+[2020-08-31 03:20:35 +00:00] WARNING : Work Order have missing coloumn that required 
+[2020-08-31 03:20:35 +00:00] ERROR : Error when connection to FTP : Sequence contains more than one element 
+[2020-08-31 03:20:35 +00:00] INFORMATION : Sending message to MsTeam with color #eb090d 
+[2020-08-31 03:20:36 +00:00] WARNING : Work Order have missing coloumn that required 
+[2020-08-31 03:20:36 +00:00] ERROR : Error when connection to FTP : Sequence contains more than one element 
+[2020-08-31 03:20:36 +00:00] INFORMATION : Sending message to MsTeam with color #eb090d 
+[2020-08-31 03:20:37 +00:00] WARNING : Work Order have missing coloumn that required 
+[2020-08-31 03:20:37 +00:00] ERROR : Error when connection to FTP : Sequence contains more than one element 
+[2020-08-31 03:20:37 +00:00] INFORMATION : Sending message to MsTeam with color #eb090d 
+[2020-08-31 03:20:38 +00:00] ERROR : Error when connection to FTP : Sequence contains more than one element 
+[2020-08-31 03:20:38 +00:00] INFORMATION : Sending message to MsTeam with color #eb090d 
+[2020-08-31 03:20:39 +00:00] ERROR : Error when connection to FTP : Sequence contains more than one element 
+[2020-08-31 03:20:39 +00:00] INFORMATION : Sending message to MsTeam with color #eb090d 
+[2020-08-31 03:20:40 +00:00] ERROR : Error when connection to FTP : Sequence contains more than one element 
+[2020-08-31 03:20:40 +00:00] INFORMATION : Sending message to MsTeam with color #eb090d 
+[2020-08-31 03:20:40 +00:00] ERROR : Error when connection to FTP : Sequence contains more than one element 
+[2020-08-31 03:20:40 +00:00] INFORMATION : Sending message to MsTeam with color #eb090d 
+[2020-08-31 03:20:41 +00:00] ERROR : Error when connection to FTP : Sequence contains more than one element 
+[2020-08-31 03:20:41 +00:00] INFORMATION : Sending message to MsTeam with color #eb090d 
+[2020-08-31 03:20:42 +00:00] ERROR : Error when connection to FTP : Sequence contains more than one element 
+[2020-08-31 03:20:42 +00:00] INFORMATION : Sending message to MsTeam with color #eb090d 
+[2020-08-31 03:20:43 +00:00] WARNING : Work Order have missing coloumn that required 
+[2020-08-31 03:20:43 +00:00] ERROR : Error when connection to FTP : Sequence contains more than one element 
+[2020-08-31 03:20:43 +00:00] INFORMATION : Sending message to MsTeam with color #eb090d 
+[2020-08-31 03:20:44 +00:00] ERROR : Error when connection to FTP : Sequence contains more than one element 
+[2020-08-31 03:20:44 +00:00] INFORMATION : Sending message to MsTeam with color #eb090d 
+[2020-08-31 03:20:45 +00:00] WARNING : Work Order have missing coloumn that required 
+[2020-08-31 03:20:45 +00:00] WARNING : Work Order have missing coloumn that required 
+[2020-08-31 03:20:45 +00:00] WARNING : Work Order have missing coloumn that required 
+[2020-08-31 03:20:45 +00:00] WARNING : Work Order have missing coloumn that required 
+[2020-08-31 03:41:43 +00:00] ERROR : Internal Server Error : System.Net.Http Cannot add value because header 'Authorization' does not support multiple values. 
+[2020-08-31 03:41:43 +00:00] INFORMATION : Sending message to MsTeam with color #eb090d 
+[2020-08-31 03:41:46 +00:00] ERROR : Internal Server Error : System.Net.Http Cannot add value because header 'Authorization' does not support multiple values. 
+[2020-08-31 03:41:46 +00:00] INFORMATION : Sending message to MsTeam with color #eb090d 
+[2020-08-31 03:41:48 +00:00] ERROR : Internal Server Error : System.Net.Http Cannot add value because header 'Authorization' does not support multiple values. 
+[2020-08-31 03:41:48 +00:00] INFORMATION : Sending message to MsTeam with color #eb090d 
