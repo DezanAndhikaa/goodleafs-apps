@@ -89,13 +89,45 @@ export default class DetailProduct extends Component {
     this.checkBookmark();
 
     db.transaction((tx) => {
+      tx.executeSql("create table if not exists bookmark (idProduct text)");
       tx.executeSql(
-        "create table if not exists bookmark (idProduct text)",
+        "create table if not exists cart (idProduct text, imageUrl text, qty int, cost int, baseColor text, productName text)"
+      );
+      tx.executeSql(
+        "select * from cart",
         [],
-        () => {}
+        (_, { rows }) => {
+          console.log(rows._array);
+        },
+        (_, err) => {
+          console.log(err);
+        }
       );
     });
   }
+
+  addToCart = () => {
+    console.log("Pressed");
+    db.transaction((tx) => {
+      tx.executeSql(
+        "insert into cart values(?,?,?,?,?,?)",
+        [
+          this.props.navigation.getParam("idProduct"),
+          this.props.navigation.getParam("image").uri,
+          this.state.qty,
+          this.props.navigation.getParam("price"),
+          this.props.navigation.getParam("baseColor"),
+          this.props.navigation.getParam("productName"),
+        ],
+        () => {
+          this.props.navigation.navigate("Cart");
+        },
+        (_, err) => {
+          console.log(err);
+        }
+      );
+    });
+  };
 
   render() {
     return (
@@ -159,7 +191,9 @@ export default class DetailProduct extends Component {
               </View>
             </View>
 
-            <TouchableOpacity style={style.pesanProdukButton}>
+            <TouchableOpacity
+              style={style.pesanProdukButton}
+              onPress={() => this.addToCart()}>
               <Text style={style.wordPesanProduk}>Pesan Produk</Text>
             </TouchableOpacity>
           </View>

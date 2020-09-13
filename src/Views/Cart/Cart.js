@@ -5,9 +5,27 @@ import Headers from "../../Components/Header/Header";
 import CartCard from "../../Components/CartCard/CartCard";
 import Apel from "../../../assets/img/products/Apel.png";
 import { ScrollView } from "react-native-gesture-handler";
+import * as SQLite from "expo-sqlite";
+
+const db = SQLite.openDatabase("local.db");
 
 export default class Cart extends Component {
+  state = {
+    data: [],
+  };
+
+  componentDidMount() {
+    db.transaction((tx) => {
+      tx.executeSql("select * from cart", [], (_, { rows }) => {
+        this.setState({
+          data: rows._array,
+        });
+      });
+    });
+  }
+
   render() {
+    console.log(this.state.data);
     return (
       <View style={style.body}>
         <Headers navigation={this.props.navigation} />
@@ -17,29 +35,19 @@ export default class Cart extends Component {
         </Text>
         <View style={style.wrapperCard}>
           <ScrollView>
-            <CartCard
-              image={Apel}
-              namaProduct="Apel Manis"
-              color="#869428"
-              qty="4"
-              prices="9000"
-            />
-
-            <CartCard
-              image={Apel}
-              namaProduct="Apel Manis"
-              color="#869428"
-              qty="4"
-              prices="9000"
-            />
-
-            <CartCard
-              image={Apel}
-              namaProduct="Apel Manis"
-              color="#869428"
-              qty="4"
-              prices="9000"
-            />
+            {this.state.data.map((data, index) => {
+              return (
+                <View key={index}>
+                  <CartCard
+                    image={{ uri: data.imageUrl }}
+                    namaProduct={data.productName}
+                    color={data.baseColor}
+                    qty={data.qty}
+                    prices={data.cost}
+                  />
+                </View>
+              );
+            })}
           </ScrollView>
 
           <TouchableOpacity style={style.pesanProdukButton}>
