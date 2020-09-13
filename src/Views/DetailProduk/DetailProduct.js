@@ -2,16 +2,22 @@ import React, { Component } from "react";
 import { Text, View, StyleSheet, Image, Button } from "react-native";
 import BackLogo from "../../../assets/img/products/iconBack.png";
 import Bookmark from "../../../assets/img/products/bookmark.png";
+import Bookmarked from "../../../assets/img/bookmarked.png";
 import Star from "../../../assets/img/products/star.png";
 import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import ReviewCard from "../../Components/ReviewCard/ReviewCard";
 import ProductCard from "../../Components/ProductCard/ProductCard";
+var NumberFormat = require("react-number-format");
+import * as SQLite from "expo-sqlite";
+
+const db = SQLite.openDatabase("local.db");
 
 export default class DetailProduct extends Component {
   constructor(props) {
     super(props);
     this.state = {
       qty: 1,
+      isBookmarked: false,
     };
   }
 
@@ -29,11 +35,77 @@ export default class DetailProduct extends Component {
     }
   };
 
+  addBookmark = () => {
+    if (this.state.isBookmarked) {
+      db.transaction((tx) => {
+        tx.executeSql(
+          "delete from bookmark where idProduct=?",
+          [this.props.navigation.getParam("idProduct")],
+          (err, { rows }) => {
+            console.log("Deleted");
+            this.setState({
+              isBookmarked: false,
+            });
+          },
+          (_, error) => {
+            console.log(error);
+          }
+        );
+      });
+    } else {
+      db.transaction((tx) => {
+        tx.executeSql(
+          "insert into bookmark values(?)",
+          [this.props.navigation.getParam("idProduct")],
+          (err, { rows }) => {
+            console.log("Added");
+            this.checkBookmark();
+          },
+          (_, error) => {
+            console.log(error);
+          }
+        );
+      });
+    }
+  };
+
+  checkBookmark = () => {
+    db.transaction((tx) => {
+      tx.executeSql(
+        "select * from bookmark where idProduct=?",
+        [this.props.navigation.getParam("idProduct")],
+        (_, { rows }) => {
+          if (rows.length > 0) {
+            this.setState({
+              isBookmarked: true,
+            });
+          }
+        }
+      );
+    });
+  };
+
+  componentDidMount() {
+    this.checkBookmark();
+
+    db.transaction((tx) => {
+      tx.executeSql(
+        "create table if not exists bookmark (idProduct text)",
+        [],
+        () => {}
+      );
+    });
+  }
+
   render() {
     return (
       <View style={style.wrapper}>
         <ScrollView>
-          <View style={style.wrapperPhoto}>
+          <View
+            style={[
+              style.wrapperPhoto,
+              { backgroundColor: this.props.navigation.getParam("baseColor") },
+            ]}>
             <TouchableOpacity
               style={{ flexDirection: "row" }}
               onPress={() => this.props.navigation.goBack()}>
@@ -47,20 +119,22 @@ export default class DetailProduct extends Component {
           </View>
 
           <View style={style.wrapperProductDetail}>
-            <Text style={style.productName}>Jeruk Manis</Text>
-            <View style={style.bookmarkStyle}>
-              <Image source={Bookmark} style={style.bookmarkImage} />
-            </View>
+            <Text style={style.productName}>
+              {this.props.navigation.getParam("productName")}
+            </Text>
+            <TouchableOpacity
+              style={style.bookmarkStyle}
+              onPress={() => this.addBookmark()}>
+              <Image
+                source={this.state.isBookmarked ? Bookmarked : Bookmark}
+                style={style.bookmarkImage}
+              />
+            </TouchableOpacity>
             <Image source={Star} style={style.ratingImage} />
 
             <View style={style.wrapperDescription}>
               <Text style={style.satuanWord}>1 Kilogram</Text>
-              <Text>
-                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-                diam nonumy eirmod tempor invidunt ut labore et dolore magna
-                aliquyam erat, sed diam voluptua. At vero eos et accusam et
-                justo duo dolores et ea rebum.
-              </Text>
+              <Text>{this.props.navigation.getParam("description")}</Text>
             </View>
 
             <View style={style.quantityItem}>
@@ -73,7 +147,15 @@ export default class DetailProduct extends Component {
               </Text>
 
               <View style={style.productPrice}>
-                <Text style={style.priceWord}>Rp 5,000</Text>
+                <NumberFormat
+                  value={this.props.navigation.getParam("price")}
+                  displayType={"text"}
+                  thousandSeparator={true}
+                  prefix={"Rp "}
+                  renderText={(value) => (
+                    <Text style={style.priceWord}>{value}</Text>
+                  )}
+                />
               </View>
             </View>
 
@@ -173,14 +255,19 @@ const style = StyleSheet.create({
   wrapperPhoto: {
     height: 500,
     width: "100%",
-    backgroundColor: "#FFBF2E",
     padding: 20,
   },
 
   imageStyle: {
-    width: 350,
-    height: 350,
+    width: 280,
+    height: 250,
     resizeMode: "contain",
+    backgroundColor: "#FFF",
+    alignSelf: "center",
+    alignContent: "center",
+    justifyContent: "center",
+    marginTop: 50,
+    padding: 40,
   },
 
   backTextStyle: {

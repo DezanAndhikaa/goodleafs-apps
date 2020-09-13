@@ -18,6 +18,8 @@ import Kubis from "../../../assets/img/products/Kubis.png";
 import Kategori from "../../Components/Kategori/Kategori";
 import Navbar from "../../Components/Navbar/Navbar";
 import * as SQLite from "expo-sqlite";
+import axios from "axios";
+import { set } from "react-native-reanimated";
 
 const db = SQLite.openDatabase("local.db");
 
@@ -34,7 +36,39 @@ export default class MainMenu extends Component {
   state = {
     name: "",
     email: "",
+    data: [],
   };
+
+  renderProduct = () => {
+    return this.state.data.map((data, index) => {
+      return (
+        <TouchableOpacity
+          key={index}
+          onPress={() =>
+            this.props.navigation.navigate("DetailProduct", {
+              image: {
+                uri: `http://2380fb6d6cca.ngrok.io/Resources/Products/${data.ImageUrl}`,
+              },
+              baseColor: data.BaseColor,
+              description: data.Description,
+              idProduct: data.IdProduct,
+              price: data.Cost,
+              productName: data.ProductName,
+            })
+          }>
+          <ProductCard
+            color={data.BaseColor}
+            image={{
+              uri: `http://2380fb6d6cca.ngrok.io/Resources/Products/${data.ImageUrl}`,
+            }}
+            nameProduct="Jeruk Manis"
+            prices="12000"
+          />
+        </TouchableOpacity>
+      );
+    });
+  };
+
   constructor(props) {
     super(props);
   }
@@ -47,6 +81,10 @@ export default class MainMenu extends Component {
           email: data[0].email,
         });
       });
+    });
+    axios.get("http://2380fb6d6cca.ngrok.io/api/Product").then((e) => {
+      let data = e.data.Data;
+      this.setState({ data: data });
     });
   }
 
@@ -69,32 +107,27 @@ export default class MainMenu extends Component {
               horizontal={true}
               showsHorizontalScrollIndicator={false}>
               <View style={style.containerProduct}>
-                <TouchableOpacity
-                  onPress={() =>
-                    this.props.navigation.navigate("DetailProduct", {
-                      image: Jeruk,
-                    })
-                  }>
-                  <ProductCard
-                    color="#FFBF2E"
-                    image={Jeruk}
-                    nameProduct="Jeruk Manis"
-                    prices="12000"
-                  />
-                </TouchableOpacity>
-
+                {this.renderProduct()}
+                {/* 
                 <ProductCard
                   color="#869428"
-                  image={Apel}
+                  image={{
+                    uri:
+                      "http://2380fb6d6cca.ngrok.io/Resources/Products/Apel.png",
+                  }}
                   nameProduct="Apel Medan"
                   prices="5000"
                 />
+
                 <ProductCard
                   color="#D0DD8D"
-                  image={Kubis}
+                  image={{
+                    uri:
+                      "http://2380fb6d6cca.ngrok.io/Resources/Products/Kubis.png",
+                  }}
                   nameProduct="Kubis Segar"
                   prices="9000"
-                />
+                /> */}
               </View>
             </ScrollView>
             <Text style={style.headerWord}> Kategori </Text>

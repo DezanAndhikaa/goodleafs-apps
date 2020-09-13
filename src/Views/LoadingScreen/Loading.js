@@ -32,6 +32,7 @@ export class LoadingScreen extends Component {
           tx.executeSql(
             "create table if not exists user (email text, name text)"
           );
+          tx.executeSql("create table if not exists bookmark (idProduct text)");
           tx.executeSql("select * from user", [], (_, { rows }) => {
             if (rows.length > 0) {
               setTimeout(() => this.props.navigation.replace("MainMenu"), 3000);
