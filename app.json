@@ -11,6 +11,7 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
+    "facebookScheme": "fb361620694995733",
     "updates": {
       "fallbackToCacheTimeout": 0
     },

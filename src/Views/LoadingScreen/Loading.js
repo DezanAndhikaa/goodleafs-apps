@@ -3,6 +3,9 @@ import { StyleSheet, View, StatusBar, Image } from "react-native";
 import LogoGoodleafs from "../../../assets/img/logos.png";
 import LoadingBar from "../../../assets/img/pulse.gif";
 import * as Font from "expo-font";
+import * as SQLite from "expo-sqlite";
+
+const db = SQLite.openDatabase("local.db");
 
 export class LoadingScreen extends Component {
   constructor(props) {
@@ -24,7 +27,20 @@ export class LoadingScreen extends Component {
       {
         dataLoaded: true,
       },
-      () => setTimeout(() => this.props.navigation.replace("SignIn"), 3000)
+      () => {
+        db.transaction((tx) => {
+          tx.executeSql(
+            "create table if not exists user (email text, name text)"
+          );
+          tx.executeSql("select * from user", [], (_, { rows }) => {
+            if (rows.length > 0) {
+              setTimeout(() => this.props.navigation.replace("MainMenu"), 3000);
+            } else {
+              setTimeout(() => this.props.navigation.replace("SignIn"), 3000);
+            }
+          });
+        });
+      }
     );
   }
 

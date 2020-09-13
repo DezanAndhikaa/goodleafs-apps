@@ -6,7 +6,7 @@ import AkunNav from "../../../assets/img/Navigation/drawable-hdpi/akun.png";
 import WishlistNav from "../../../assets/img/Navigation/drawable-hdpi/wishlist.png";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
-export default Navbar = ({ navigation } = props) => {
+export default Navbar = ({ navigation, accountName } = props) => {
   return (
     <View style={style.wrapperNavbar}>
       <TouchableOpacity onPress={() => navigation.navigate("MainMenu")}>
@@ -24,7 +24,7 @@ export default Navbar = ({ navigation } = props) => {
       <TouchableOpacity
         onPress={() =>
           navigation.navigate("Account", {
-            namaAccount: "Dezan Andhika",
+            namaAccount: accountName,
           })
         }>
         <Image source={AkunNav} style={style.image} />

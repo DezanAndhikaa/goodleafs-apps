@@ -17,6 +17,9 @@ import Salad from "../../../assets/img/products/salad.png";
 import Kubis from "../../../assets/img/products/Kubis.png";
 import Kategori from "../../Components/Kategori/Kategori";
 import Navbar from "../../Components/Navbar/Navbar";
+import * as SQLite from "expo-sqlite";
+
+const db = SQLite.openDatabase("local.db");
 
 const WelcomeWord = (words, second) => {
   return (
@@ -28,9 +31,25 @@ const WelcomeWord = (words, second) => {
 };
 
 export default class MainMenu extends Component {
+  state = {
+    name: "",
+    email: "",
+  };
   constructor(props) {
     super(props);
   }
+  componentDidMount() {
+    db.transaction((tx) => {
+      tx.executeSql("select * from user", [], (_, { rows }) => {
+        const data = rows._array;
+        this.setState({
+          name: data[0].name,
+          email: data[0].email,
+        });
+      });
+    });
+  }
+
   render() {
     return (
       <View style={{ flex: 1, backgroundColor: "#FFF" }}>
@@ -154,7 +173,10 @@ export default class MainMenu extends Component {
           </View>
         </ScrollView>
 
-        <Navbar navigation={this.props.navigation} />
+        <Navbar
+          navigation={this.props.navigation}
+          accountName={this.state.name}
+        />
       </View>
     );
   }

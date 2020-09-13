@@ -5,8 +5,28 @@ import Avatar from "../../../assets/img/default-avatar.png";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import Navbar from "../../Components/Navbar/Navbar";
 import VerifiedLogo from "../../../assets/img/verified.png";
+import * as SQLite from "expo-sqlite";
+
+const db = SQLite.openDatabase("local.db");
 
 export default class Account extends Component {
+  state = {
+    name: "",
+    email: "",
+  };
+
+  componentDidMount() {
+    db.transaction((tx) => {
+      tx.executeSql("select * from user", [], (_, { rows }) => {
+        const data = rows._array;
+        this.setState({
+          name: data[0].name,
+          email: data[0].email,
+        });
+      });
+    });
+  }
+
   render() {
     return (
       <View
@@ -17,7 +37,7 @@ export default class Account extends Component {
           <Headers navigation={this.props.navigation} />
           <Text style={style.title}>
             Hallo, {"\n"}
-            {this.props.navigation.getParam("namaAccount")}
+            {this.state.name}
           </Text>
 
           <View style={style.wrapperPhoto}>
@@ -28,7 +48,7 @@ export default class Account extends Component {
                 {this.props.navigation.getParam("namaAccount")}
               </Text>
 
-              <Text style={style.emailAkun}>dezanandhika@outlook.com</Text>
+              <Text style={style.emailAkun}>{this.state.email}</Text>
             </View>
           </View>
 
