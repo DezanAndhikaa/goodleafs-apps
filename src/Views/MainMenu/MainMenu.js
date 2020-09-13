@@ -61,8 +61,8 @@ export default class MainMenu extends Component {
             image={{
               uri: `http://2380fb6d6cca.ngrok.io/Resources/Products/${data.ImageUrl}`,
             }}
-            nameProduct="Jeruk Manis"
-            prices="12000"
+            nameProduct={data.ProductName}
+            prices={data.Cost}
           />
         </TouchableOpacity>
       );
@@ -106,29 +106,7 @@ export default class MainMenu extends Component {
             <ScrollView
               horizontal={true}
               showsHorizontalScrollIndicator={false}>
-              <View style={style.containerProduct}>
-                {this.renderProduct()}
-                {/* 
-                <ProductCard
-                  color="#869428"
-                  image={{
-                    uri:
-                      "http://2380fb6d6cca.ngrok.io/Resources/Products/Apel.png",
-                  }}
-                  nameProduct="Apel Medan"
-                  prices="5000"
-                />
-
-                <ProductCard
-                  color="#D0DD8D"
-                  image={{
-                    uri:
-                      "http://2380fb6d6cca.ngrok.io/Resources/Products/Kubis.png",
-                  }}
-                  nameProduct="Kubis Segar"
-                  prices="9000"
-                /> */}
-              </View>
+              <View style={style.containerProduct}>{this.renderProduct()}</View>
             </ScrollView>
             <Text style={style.headerWord}> Kategori </Text>
             <ScrollView

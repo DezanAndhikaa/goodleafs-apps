@@ -3,6 +3,11 @@ import { Text, View, StyleSheet, FlatList } from "react-native";
 import Headers from "../../Components/Header/Header";
 import ProductCard from "../../Components/ProductCard/ProductCard";
 import JerukManis from "../../../assets/img/products/Jeruks.png";
+import * as SQLite from "expo-sqlite";
+import { set } from "react-native-reanimated";
+import Axios from "axios";
+
+const db = SQLite.openDatabase("local.db");
 
 const data = [
   {
@@ -26,6 +31,35 @@ const data = [
 ];
 
 export default class Wishlist extends Component {
+  state = {
+    dataWishlist: [],
+    Id: [],
+  };
+  componentDidMount() {
+    var IdProducts = [];
+    db.transaction((tx) => {
+      tx.executeSql(
+        "select * from bookmark",
+        [],
+        (err, { rows }) => {
+          rows._array.map((data) => {
+            IdProducts.push(data.idProduct);
+          });
+          Axios.post("http://2380fb6d6cca.ngrok.io/api/Client/bookmark", {
+            IdProducts,
+          }).then((e) => {
+            this.setState({
+              dataWishlist: e.data,
+            });
+          });
+        },
+        (_, error) => {
+          console.log(error);
+        }
+      );
+    });
+  }
+
   render() {
     return (
       <View style={style.body}>
@@ -35,13 +69,15 @@ export default class Wishlist extends Component {
           WishList
         </Text>
         <View style={style.wrapperBody}>
-          {data.map((data, index) => (
+          {this.state.dataWishlist.map((data, index) => (
             <View style={style.styleItem} key={index}>
               <ProductCard
-                color={data.color}
-                nameProduct={data.nameProduct}
-                prices={data.prices}
-                image={data.image}
+                color={data.BaseColor}
+                nameProduct={data.ProductName}
+                prices={data.Cost}
+                image={{
+                  uri: `http://2380fb6d6cca.ngrok.io/Resources/Products/${data.ImageUrl}`,
+                }}
               />
             </View>
           ))}
