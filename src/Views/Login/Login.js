@@ -31,7 +31,7 @@ const Login = ({ navigation } = props) => {
       Email: email,
       Password: password,
     };
-    Axios.post("http://ee974ce4f8f6.ngrok.io/api/Client/login", payload)
+    Axios.post("http://fd51fe99a1a1.ngrok.io/api/Client/login", payload)
       .then((e) => {
         db.transaction((tx) => {
           tx.executeSql("insert into user values(?,?)", [email, password]);

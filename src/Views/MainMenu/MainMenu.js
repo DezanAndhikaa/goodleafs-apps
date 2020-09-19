@@ -47,7 +47,7 @@ export default class MainMenu extends Component {
           onPress={() =>
             this.props.navigation.navigate("DetailProduct", {
               image: {
-                uri: `http://ee974ce4f8f6.ngrok.io/Resources/Products/${data.ImageUrl}`,
+                uri: `http://fd51fe99a1a1.ngrok.io/Resources/Products/${data.ImageUrl}`,
               },
               baseColor: data.BaseColor,
               description: data.Description,
@@ -59,7 +59,7 @@ export default class MainMenu extends Component {
           <ProductCard
             color={data.BaseColor}
             image={{
-              uri: `http://ee974ce4f8f6.ngrok.io/Resources/Products/${data.ImageUrl}`,
+              uri: `http://fd51fe99a1a1.ngrok.io/Resources/Products/${data.ImageUrl}`,
             }}
             nameProduct={data.ProductName}
             prices={data.Cost}
@@ -82,7 +82,7 @@ export default class MainMenu extends Component {
         });
       });
     });
-    axios.get("http://ee974ce4f8f6.ngrok.io/api/Product").then((e) => {
+    axios.get("http://fd51fe99a1a1.ngrok.io/api/Product").then((e) => {
       let data = e.data.Data;
       this.setState({ data: data });
     });

@@ -45,7 +45,7 @@ export default class Wishlist extends Component {
           rows._array.map((data) => {
             IdProducts.push(data.idProduct);
           });
-          Axios.post("http://ee974ce4f8f6.ngrok.io/api/Client/bookmark", {
+          Axios.post("http://fd51fe99a1a1.ngrok.io/api/Client/bookmark", {
             IdProducts,
           }).then((e) => {
             this.setState({
@@ -76,7 +76,7 @@ export default class Wishlist extends Component {
                 nameProduct={data.ProductName}
                 prices={data.Cost}
                 image={{
-                  uri: `http://ee974ce4f8f6.ngrok.io/Resources/Products/${data.ImageUrl}`,
+                  uri: `http://fd51fe99a1a1.ngrok.io/Resources/Products/${data.ImageUrl}`,
                 }}
               />
             </View>

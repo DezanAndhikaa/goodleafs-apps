@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Text, View, StyleSheet, Image, Button } from "react-native";
+import { Text, View, StyleSheet, Image, ToastAndroid } from "react-native";
 import BackLogo from "../../../assets/img/products/iconBack.png";
 import Bookmark from "../../../assets/img/products/bookmark.png";
 import Bookmarked from "../../../assets/img/bookmarked.png";
@@ -12,12 +12,27 @@ import * as SQLite from "expo-sqlite";
 
 const db = SQLite.openDatabase("local.db");
 
+const Toast = ({ visible, message }) => {
+  if (visible) {
+    ToastAndroid.showWithGravityAndOffset(
+      message,
+      ToastAndroid.LONG,
+      ToastAndroid.BOTTOM,
+      25,
+      50
+    );
+    return null;
+  }
+  return null;
+};
+
 export default class DetailProduct extends Component {
   constructor(props) {
     super(props);
     this.state = {
       qty: 1,
       isBookmarked: false,
+      visibleToast: false,
     };
   }
 
@@ -96,9 +111,7 @@ export default class DetailProduct extends Component {
       tx.executeSql(
         "select * from cart",
         [],
-        (_, { rows }) => {
-          console.log(rows._array);
-        },
+        (_, { rows }) => {},
         (_, err) => {
           console.log(err);
         }
@@ -144,11 +157,22 @@ export default class DetailProduct extends Component {
               <Image source={BackLogo} />
               <Text style={style.backTextStyle}>Kembali</Text>
             </TouchableOpacity>
-            <Image
-              source={this.props.navigation.getParam("image")}
-              style={style.imageStyle}
-            />
+
+            <View style={style.wrapperImage}>
+              <Image
+                source={this.props.navigation.getParam("image")}
+                style={style.imageStyle}
+              />
+            </View>
           </View>
+          <Toast
+            visible={this.state.visibleToast}
+            message={
+              this.state.isBookmarked
+                ? "Product disimpan di wishlist"
+                : "Product dihapus dari wishlist"
+            }
+          />
 
           <View style={style.wrapperProductDetail}>
             <Text style={style.productName}>
@@ -156,7 +180,12 @@ export default class DetailProduct extends Component {
             </Text>
             <TouchableOpacity
               style={style.bookmarkStyle}
-              onPress={() => this.addBookmark()}>
+              onPress={() => {
+                this.addBookmark();
+                this.setState({
+                  visibleToast: true,
+                });
+              }}>
               <Image
                 source={this.state.isBookmarked ? Bookmarked : Bookmark}
                 style={style.bookmarkImage}
@@ -293,15 +322,11 @@ const style = StyleSheet.create({
   },
 
   imageStyle: {
-    width: 280,
-    height: 250,
+    width: 270,
+    height: 270,
     resizeMode: "contain",
     backgroundColor: "#FFF",
     alignSelf: "center",
-    alignContent: "center",
-    justifyContent: "center",
-    marginTop: 50,
-    padding: 40,
   },
 
   backTextStyle: {
@@ -480,5 +505,15 @@ const style = StyleSheet.create({
     flexDirection: "row",
     paddingLeft: 30,
     marginBottom: 30,
+  },
+
+  wrapperImage: {
+    backgroundColor: "#FFF",
+    height: 305,
+    width: "95%",
+    borderRadius: 20,
+    marginLeft: 10,
+    marginTop: 20,
+    justifyContent: "center",
   },
 });
