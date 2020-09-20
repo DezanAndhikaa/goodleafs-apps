@@ -24,8 +24,21 @@ export default class Cart extends Component {
     });
   }
 
+  deleteProductCart = (idProduct) => {
+    db.transaction((tx) => {
+      tx.executeSql(
+        "delete from cart where idProduct=?",
+        [idProduct],
+        (_, { rows }) => {
+          this.setState({
+            data: rows._array,
+          });
+        }
+      );
+    });
+  };
+
   render() {
-    console.log(this.state.data);
     return (
       <View style={style.body}>
         <Headers navigation={this.props.navigation} />
@@ -44,6 +57,9 @@ export default class Cart extends Component {
                     color={data.baseColor}
                     qty={data.qty}
                     prices={data.cost}
+                    deleteFunction={() =>
+                      this.deleteProductCart(data.idProduct)
+                    }
                   />
                 </View>
               );

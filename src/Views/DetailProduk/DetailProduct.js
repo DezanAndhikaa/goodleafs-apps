@@ -33,6 +33,7 @@ export default class DetailProduct extends Component {
       qty: 1,
       isBookmarked: false,
       visibleToast: false,
+      toastMessage: "",
     };
   }
 
@@ -60,6 +61,8 @@ export default class DetailProduct extends Component {
             console.log("Deleted");
             this.setState({
               isBookmarked: false,
+              visibleToast: true,
+              toastMessage: "Product dihapus dari wishlist",
             });
           },
           (_, error) => {
@@ -75,6 +78,10 @@ export default class DetailProduct extends Component {
           (err, { rows }) => {
             console.log("Added");
             this.checkBookmark();
+            this.setState({
+              visibleToast: true,
+              toastMessage: "Product ditambahkan di wishlist",
+            });
           },
           (_, error) => {
             console.log(error);
@@ -121,19 +128,39 @@ export default class DetailProduct extends Component {
 
   addToCart = () => {
     console.log("Pressed");
+    let totalData = 0;
+
     db.transaction((tx) => {
       tx.executeSql(
-        "insert into cart values(?,?,?,?,?,?)",
-        [
-          this.props.navigation.getParam("idProduct"),
-          this.props.navigation.getParam("image").uri,
-          this.state.qty,
-          this.props.navigation.getParam("price"),
-          this.props.navigation.getParam("baseColor"),
-          this.props.navigation.getParam("productName"),
-        ],
-        () => {
-          this.props.navigation.navigate("Cart");
+        "select * from cart where idProduct=?",
+        [this.props.navigation.getParam("idProduct")],
+        (_, { rows }) => {
+          if (rows.length > 0) {
+            this.setState({
+              toastMessage: "Produk sudah ditambahkan di cart!",
+              visibleToast: true,
+            });
+          } else {
+            db.transaction((tx) => {
+              tx.executeSql(
+                "insert into cart values(?,?,?,?,?,?)",
+                [
+                  this.props.navigation.getParam("idProduct"),
+                  this.props.navigation.getParam("image").uri,
+                  this.state.qty,
+                  this.props.navigation.getParam("price"),
+                  this.props.navigation.getParam("baseColor"),
+                  this.props.navigation.getParam("productName"),
+                ],
+                () => {
+                  this.props.navigation.navigate("Cart");
+                },
+                (_, err) => {
+                  console.log(err);
+                }
+              );
+            });
+          }
         },
         (_, err) => {
           console.log(err);
@@ -167,11 +194,7 @@ export default class DetailProduct extends Component {
           </View>
           <Toast
             visible={this.state.visibleToast}
-            message={
-              this.state.isBookmarked
-                ? "Product disimpan di wishlist"
-                : "Product dihapus dari wishlist"
-            }
+            message={this.state.toastMessage}
           />
 
           <View style={style.wrapperProductDetail}>
@@ -182,9 +205,6 @@ export default class DetailProduct extends Component {
               style={style.bookmarkStyle}
               onPress={() => {
                 this.addBookmark();
-                this.setState({
-                  visibleToast: true,
-                });
               }}>
               <Image
                 source={this.state.isBookmarked ? Bookmarked : Bookmark}
@@ -199,12 +219,12 @@ export default class DetailProduct extends Component {
             </View>
 
             <View style={style.quantityItem}>
-              <Text style={style.incrementButton} onPress={this.addQty}>
-                +
+              <Text style={style.incrementButton} onPress={this.decQty}>
+                -
               </Text>
               <Text style={style.totalQty}>{this.state.qty}</Text>
-              <Text style={style.decrementButton} onPress={this.decQty}>
-                -
+              <Text style={style.decrementButton} onPress={this.addQty}>
+                +
               </Text>
 
               <View style={style.productPrice}>

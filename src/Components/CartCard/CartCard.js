@@ -11,6 +11,7 @@ export default CartCard = ({
   qty,
   prices,
   color,
+  deleteFunction,
 } = props) => {
   const [totalqty, setQty] = useState(qty);
 
@@ -26,25 +27,25 @@ export default CartCard = ({
           <Text
             style={style.incrementButton}
             onPress={() => {
-              setQty(totalqty + 1);
+              setQty(totalqty - 1);
             }}>
-            +
+            -
           </Text>
           <Text style={style.totalQty}>{totalqty}</Text>
           <Text
             style={style.decrementButton}
             onPress={() => {
               if (totalqty > 1) {
-                setQty(totalqty - 1);
+                setQty(totalqty + 1);
               }
             }}>
-            -
+            +
           </Text>
           <View
             style={{
               marginLeft: "auto",
             }}>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={deleteFunction}>
               <Image source={Delete} />
             </TouchableOpacity>
           </View>

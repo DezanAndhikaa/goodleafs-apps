@@ -14,6 +14,7 @@ import { ScrollView } from "react-native-gesture-handler";
 import Jeruk from "../../../assets/img/products/Jeruks.png";
 import Apel from "../../../assets/img/products/Apel.png";
 import Salad from "../../../assets/img/products/salad.png";
+import Buah from "../../../assets/img/buah.jpg";
 import Kubis from "../../../assets/img/products/Kubis.png";
 import Kategori from "../../Components/Kategori/Kategori";
 import Navbar from "../../Components/Navbar/Navbar";
@@ -36,11 +37,13 @@ export default class MainMenu extends Component {
   state = {
     name: "",
     email: "",
-    data: [],
+    dataDeal: [],
+    dataCategory: [],
+    etalaseList: [],
   };
 
   renderProduct = () => {
-    return this.state.data.map((data, index) => {
+    return this.state.dataDeal.map((data, index) => {
       return (
         <TouchableOpacity
           key={index}
@@ -69,6 +72,67 @@ export default class MainMenu extends Component {
     });
   };
 
+  renderCategory = () => {
+    let indexer = 0;
+    return this.state.dataCategory.map((data, index) => {
+      if (++indexer % 2 == 0) {
+        return (
+          <TouchableOpacity key={index}>
+            <Kategori
+              image={{
+                uri: `http://fd51fe99a1a1.ngrok.io/Resources/Category/${data.ImageUrl}`,
+              }}
+              title={data.CategoryName}
+            />
+          </TouchableOpacity>
+        );
+      }
+    });
+  };
+
+  renderEtalase = () => {
+    return this.state.etalaseList.map((data, index) => {
+      return (
+        <View key={index}>
+          <Text style={style.headerWord}> {data.CategoryName} </Text>
+          <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+            <View style={style.containerProduct}>
+              {data.Products.map((data, index) => {
+                return (
+                  <ProductCard
+                    color={data.BaseColor}
+                    image={{
+                      uri: `http://fd51fe99a1a1.ngrok.io/Resources/Products/${data.ImageUrl}`,
+                    }}
+                    nameProduct={data.ProductName}
+                    prices={data.Cost}
+                  />
+                );
+              })}
+            </View>
+          </ScrollView>
+        </View>
+      );
+    });
+  };
+  renderCategorySecond = () => {
+    let indexer = 0;
+    return this.state.dataCategory.map((data, index) => {
+      if (++indexer % 2 == 1) {
+        return (
+          <TouchableOpacity key={index}>
+            <Kategori
+              image={{
+                uri: `http://fd51fe99a1a1.ngrok.io/Resources/Category/${data.ImageUrl}`,
+              }}
+              title={data.CategoryName}
+            />
+          </TouchableOpacity>
+        );
+      }
+    });
+  };
+
   constructor(props) {
     super(props);
   }
@@ -82,9 +146,11 @@ export default class MainMenu extends Component {
         });
       });
     });
-    axios.get("http://fd51fe99a1a1.ngrok.io/api/Product").then((e) => {
-      let data = e.data.Data;
-      this.setState({ data: data });
+
+    this.setState({
+      dataDeal: this.props.navigation.getParam("data").DealoftheDay,
+      dataCategory: this.props.navigation.getParam("data").Category,
+      etalaseList: this.props.navigation.getParam("data").EtalaseList,
     });
   }
 
@@ -112,75 +178,18 @@ export default class MainMenu extends Component {
             <ScrollView
               horizontal={true}
               showsHorizontalScrollIndicator={false}>
-              <View style={{ flexDirection: "row" }}>
+              <View style={{ flexDirection: "column" }}>
                 <View style={style.containerKategori}>
-                  <Kategori image={Salad} title="Sayuran Hidroponik" />
-                  <Kategori image={Salad} title="Makanan Dingin" />
+                  {this.renderCategorySecond()}
                 </View>
 
-                <View style={style.containerKategori}>
-                  <Kategori image={Salad} title="Buah-buahan" />
-                  <Kategori image={Salad} title="Sayuran Organik" />
-                </View>
-
-                <View style={style.containerKategori}>
-                  <Kategori image={Salad} title="Sayuran Hidroponik" />
-                  <Kategori image={Salad} title="Sayuran Hidroponik" />
+                <View style={style.containerKategoriTwo}>
+                  {this.renderCategory()}
                 </View>
               </View>
             </ScrollView>
 
-            <Text style={style.headerWord}> Makanan Dingin </Text>
-            <ScrollView
-              horizontal={true}
-              showsHorizontalScrollIndicator={false}>
-              <View style={style.containerProduct}>
-                <ProductCard
-                  color="#FFBF2E"
-                  image={Jeruk}
-                  nameProduct="Jeruk Manis"
-                  prices="12000"
-                />
-                <ProductCard
-                  color="#869428"
-                  image={Apel}
-                  nameProduct="Apel Medan"
-                  prices="5000"
-                />
-                <ProductCard
-                  color="#D0DD8D"
-                  image={Kubis}
-                  nameProduct="Kubis Segar"
-                  prices="9000"
-                />
-              </View>
-            </ScrollView>
-
-            <Text style={style.headerWord}> Sayuran Organik </Text>
-            <ScrollView
-              horizontal={true}
-              showsHorizontalScrollIndicator={false}>
-              <View style={style.containerProduct}>
-                <ProductCard
-                  color="#FFBF2E"
-                  image={Jeruk}
-                  nameProduct="Jeruk Manis"
-                  prices="12000"
-                />
-                <ProductCard
-                  color="#869428"
-                  image={Apel}
-                  nameProduct="Apel Medan"
-                  prices="5000"
-                />
-                <ProductCard
-                  color="#D0DD8D"
-                  image={Kubis}
-                  nameProduct="Kubis Segar"
-                  prices="9000"
-                />
-              </View>
-            </ScrollView>
+            {this.renderEtalase()}
           </View>
         </ScrollView>
 
@@ -227,7 +236,16 @@ const style = StyleSheet.create({
   },
 
   containerKategori: {
-    flexDirection: "column",
+    flexDirection: "row",
+    flex: 1,
+    justifyContent: "space-between",
+    paddingLeft: 10,
+    backgroundColor: "#FFF",
+    paddingBottom: 5,
+  },
+
+  containerKategoriTwo: {
+    flexDirection: "row",
     flex: 1,
     justifyContent: "space-between",
     paddingLeft: 10,

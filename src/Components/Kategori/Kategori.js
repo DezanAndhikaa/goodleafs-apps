@@ -4,11 +4,12 @@ import { View, StyleSheet, Image, Text } from "react-native";
 export default Kategori = ({ image, title } = props) => {
   return (
     <View style={style.wrapper}>
-      <Image source={image} />
+      <Image source={image} style={style.imagesStyle} />
       <Text
         style={{
           fontFamily: "segoe-semi-bold",
           fontSize: 12,
+          marginTop: 5,
         }}>
         {title}
       </Text>
@@ -36,7 +37,15 @@ const style = StyleSheet.create({
     paddingTop: 14,
     paddingLeft: 10,
     paddingRight: 15,
+    marginRight: 15,
 
     flexDirection: "row",
+  },
+
+  imagesStyle: {
+    width: 30,
+    height: 30,
+    marginRight: 7,
+    resizeMode: "contain",
   },
 });

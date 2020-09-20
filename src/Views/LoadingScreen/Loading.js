@@ -4,6 +4,7 @@ import LogoGoodleafs from "../../../assets/img/logos.png";
 import LoadingBar from "../../../assets/img/pulse.gif";
 import * as Font from "expo-font";
 import * as SQLite from "expo-sqlite";
+import Axios from "axios";
 
 const db = SQLite.openDatabase("local.db");
 
@@ -12,10 +13,21 @@ export class LoadingScreen extends Component {
     super(props);
     this.state = {
       dataLoaded: false,
+      dataList: [],
     };
   }
 
+  loadDeal = async () => {
+    let data = await Axios.get(
+      "http://fd51fe99a1a1.ngrok.io/api/Client/opening"
+    );
+    this.setState({
+      dataList: data.data,
+    });
+  };
+
   componentDidMount() {
+    this.loadDeal();
     Font.loadAsync({
       "segoe-ui": require("../../../assets/fonts/Segoe-UI.ttf"),
       "segoe-italic": require("../../../assets/fonts/Segoe-UI-Italic.ttf"),
@@ -35,7 +47,13 @@ export class LoadingScreen extends Component {
           tx.executeSql("create table if not exists bookmark (idProduct text)");
           tx.executeSql("select * from user", [], (_, { rows }) => {
             if (rows.length > 0) {
-              setTimeout(() => this.props.navigation.replace("MainMenu"), 3000);
+              setTimeout(
+                () =>
+                  this.props.navigation.replace("MainMenu", {
+                    data: this.state.dataList,
+                  }),
+                3000
+              );
             } else {
               setTimeout(() => this.props.navigation.replace("SignIn"), 3000);
             }
