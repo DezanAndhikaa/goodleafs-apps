@@ -3,6 +3,8 @@ import { Text, View, StyleSheet, FlatList } from "react-native";
 import Headers from "../../Components/Header/Header";
 import ProductCard from "../../Components/ProductCard/ProductCard";
 import JerukManis from "../../../assets/img/products/Jeruks.png";
+import Axios from "axios";
+import { ScrollView } from "react-native-gesture-handler";
 
 const data = [
   {
@@ -26,26 +28,49 @@ const data = [
 ];
 
 export default class DetailSearch extends Component {
+  state = {
+    dataList: [],
+  };
+
+  loadData = async () => {
+    const namaProduk = this.props.navigation.getParam("namaCategory");
+    let data = await Axios.get(
+      `http://fd51fe99a1a1.ngrok.io/api/Client/category/s?CategoryName=${namaProduk}`
+    );
+
+    this.setState({
+      dataList: data.data,
+    });
+  };
+
+  componentDidMount() {
+    this.loadData();
+  }
+
   render() {
     return (
       <View style={style.body}>
         <Headers navigation={this.props.navigation} />
-        <Text style={style.title}>
-          Pencarian{"\n"}
-          Produk
-        </Text>
-        <View style={style.wrapperBody}>
-          {data.map((data, index) => (
-            <View style={style.styleItem} key={index}>
-              <ProductCard
-                color={data.color}
-                nameProduct={data.nameProduct}
-                prices={data.prices}
-                image={data.image}
-              />
-            </View>
-          ))}
-        </View>
+        <ScrollView>
+          <Text style={style.title}>
+            Pencarian{"\n"}
+            {this.props.navigation.getParam("pencarian")}
+          </Text>
+          <View style={style.wrapperBody}>
+            {this.state.dataList.map((data, index) => (
+              <View style={style.styleItem} key={index}>
+                <ProductCard
+                  color={data.BaseColor}
+                  nameProduct={data.ProductName}
+                  prices={data.Cost}
+                  image={{
+                    uri: `http://fd51fe99a1a1.ngrok.io/Resources/Products/${data.ImageUrl}`,
+                  }}
+                />
+              </View>
+            ))}
+          </View>
+        </ScrollView>
       </View>
     );
   }

@@ -77,7 +77,14 @@ export default class MainMenu extends Component {
     return this.state.dataCategory.map((data, index) => {
       if (++indexer % 2 == 0) {
         return (
-          <TouchableOpacity key={index}>
+          <TouchableOpacity
+            key={index}
+            onPress={() => {
+              this.props.navigation.navigate("DetailSearch", {
+                namaCategory: data.CategoryName,
+                pencarian: "Kategori",
+              });
+            }}>
             <Kategori
               image={{
                 uri: `http://fd51fe99a1a1.ngrok.io/Resources/Category/${data.ImageUrl}`,
@@ -99,14 +106,16 @@ export default class MainMenu extends Component {
             <View style={style.containerProduct}>
               {data.Products.map((data, index) => {
                 return (
-                  <ProductCard
-                    color={data.BaseColor}
-                    image={{
-                      uri: `http://fd51fe99a1a1.ngrok.io/Resources/Products/${data.ImageUrl}`,
-                    }}
-                    nameProduct={data.ProductName}
-                    prices={data.Cost}
-                  />
+                  <View key={index}>
+                    <ProductCard
+                      color={data.BaseColor}
+                      image={{
+                        uri: `http://fd51fe99a1a1.ngrok.io/Resources/Products/${data.ImageUrl}`,
+                      }}
+                      nameProduct={data.ProductName}
+                      prices={data.Cost}
+                    />
+                  </View>
                 );
               })}
             </View>
@@ -120,7 +129,14 @@ export default class MainMenu extends Component {
     return this.state.dataCategory.map((data, index) => {
       if (++indexer % 2 == 1) {
         return (
-          <TouchableOpacity key={index}>
+          <TouchableOpacity
+            key={index}
+            onPress={() => {
+              this.props.navigation.navigate("DetailSearch", {
+                namaCategory: data.CategoryName,
+                pencarian: "Kategori",
+              });
+            }}>
             <Kategori
               image={{
                 uri: `http://fd51fe99a1a1.ngrok.io/Resources/Category/${data.ImageUrl}`,
