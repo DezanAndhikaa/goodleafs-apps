@@ -50,7 +50,7 @@ export default class MainMenu extends Component {
           onPress={() =>
             this.props.navigation.navigate("DetailProduct", {
               image: {
-                uri: `http://fd51fe99a1a1.ngrok.io/Resources/Products/${data.ImageUrl}`,
+                uri: `http://0cdf877f1c42.ngrok.io /Resources/Products/${data.ImageUrl}`,
               },
               baseColor: data.BaseColor,
               description: data.Description,
@@ -62,7 +62,7 @@ export default class MainMenu extends Component {
           <ProductCard
             color={data.BaseColor}
             image={{
-              uri: `http://fd51fe99a1a1.ngrok.io/Resources/Products/${data.ImageUrl}`,
+              uri: `http://0cdf877f1c42.ngrok.io /Resources/Products/${data.ImageUrl}`,
             }}
             nameProduct={data.ProductName}
             prices={data.Cost}
@@ -87,7 +87,7 @@ export default class MainMenu extends Component {
             }}>
             <Kategori
               image={{
-                uri: `http://fd51fe99a1a1.ngrok.io/Resources/Category/${data.ImageUrl}`,
+                uri: `http://0cdf877f1c42.ngrok.io /Resources/Category/${data.ImageUrl}`,
               }}
               title={data.CategoryName}
             />
@@ -110,7 +110,7 @@ export default class MainMenu extends Component {
                     <ProductCard
                       color={data.BaseColor}
                       image={{
-                        uri: `http://fd51fe99a1a1.ngrok.io/Resources/Products/${data.ImageUrl}`,
+                        uri: `http://0cdf877f1c42.ngrok.io /Resources/Products/${data.ImageUrl}`,
                       }}
                       nameProduct={data.ProductName}
                       prices={data.Cost}
@@ -139,7 +139,7 @@ export default class MainMenu extends Component {
             }}>
             <Kategori
               image={{
-                uri: `http://fd51fe99a1a1.ngrok.io/Resources/Category/${data.ImageUrl}`,
+                uri: `http://0cdf877f1c42.ngrok.io /Resources/Category/${data.ImageUrl}`,
               }}
               title={data.CategoryName}
             />

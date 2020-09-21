@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Text, View, StyleSheet, FlatList } from "react-native";
+import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
 import Headers from "../../Components/Header/Header";
 import ProductCard from "../../Components/ProductCard/ProductCard";
 import JerukManis from "../../../assets/img/products/Jeruks.png";
@@ -35,7 +35,7 @@ export default class DetailSearch extends Component {
   loadData = async () => {
     const namaProduk = this.props.navigation.getParam("namaCategory");
     let data = await Axios.get(
-      `http://fd51fe99a1a1.ngrok.io/api/Client/category/s?CategoryName=${namaProduk}`
+      `http://0cdf877f1c42.ngrok.io /api/Client/category/s?CategoryName=${namaProduk}`
     );
 
     this.setState({
@@ -64,7 +64,7 @@ export default class DetailSearch extends Component {
                   nameProduct={data.ProductName}
                   prices={data.Cost}
                   image={{
-                    uri: `http://fd51fe99a1a1.ngrok.io/Resources/Products/${data.ImageUrl}`,
+                    uri: `http://0cdf877f1c42.ngrok.io /Resources/Products/${data.ImageUrl}`,
                   }}
                 />
               </View>
