@@ -11,16 +11,9 @@ import MainBar from "../../Components/MainBar/MainBar";
 import Banner from "../../../assets/img/banner.png";
 import ProductCard from "../../Components/ProductCard/ProductCard";
 import { ScrollView } from "react-native-gesture-handler";
-import Jeruk from "../../../assets/img/products/Jeruks.png";
-import Apel from "../../../assets/img/products/Apel.png";
-import Salad from "../../../assets/img/products/salad.png";
-import Buah from "../../../assets/img/buah.jpg";
-import Kubis from "../../../assets/img/products/Kubis.png";
 import Kategori from "../../Components/Kategori/Kategori";
 import Navbar from "../../Components/Navbar/Navbar";
 import * as SQLite from "expo-sqlite";
-import axios from "axios";
-import { set } from "react-native-reanimated";
 
 const db = SQLite.openDatabase("local.db");
 
@@ -50,7 +43,7 @@ export default class MainMenu extends Component {
           onPress={() =>
             this.props.navigation.navigate("DetailProduct", {
               image: {
-                uri: `http://0cdf877f1c42.ngrok.io /Resources/Products/${data.ImageUrl}`,
+                uri: `http://0cdf877f1c42.ngrok.io/Resources/Products/${data.ImageUrl}`,
               },
               baseColor: data.BaseColor,
               description: data.Description,
@@ -62,7 +55,7 @@ export default class MainMenu extends Component {
           <ProductCard
             color={data.BaseColor}
             image={{
-              uri: `http://0cdf877f1c42.ngrok.io /Resources/Products/${data.ImageUrl}`,
+              uri: `http://0cdf877f1c42.ngrok.io/Resources/Products/${data.ImageUrl}`,
             }}
             nameProduct={data.ProductName}
             prices={data.Cost}
@@ -87,7 +80,7 @@ export default class MainMenu extends Component {
             }}>
             <Kategori
               image={{
-                uri: `http://0cdf877f1c42.ngrok.io /Resources/Category/${data.ImageUrl}`,
+                uri: `http://0cdf877f1c42.ngrok.io/Resources/Category/${data.ImageUrl}`,
               }}
               title={data.CategoryName}
             />
@@ -110,7 +103,7 @@ export default class MainMenu extends Component {
                     <ProductCard
                       color={data.BaseColor}
                       image={{
-                        uri: `http://0cdf877f1c42.ngrok.io /Resources/Products/${data.ImageUrl}`,
+                        uri: `http://0cdf877f1c42.ngrok.io/Resources/Products/${data.ImageUrl}`,
                       }}
                       nameProduct={data.ProductName}
                       prices={data.Cost}
@@ -139,7 +132,7 @@ export default class MainMenu extends Component {
             }}>
             <Kategori
               image={{
-                uri: `http://0cdf877f1c42.ngrok.io /Resources/Category/${data.ImageUrl}`,
+                uri: `http://0cdf877f1c42.ngrok.io/Resources/Category/${data.ImageUrl}`,
               }}
               title={data.CategoryName}
             />

@@ -35,7 +35,7 @@ export default class DetailSearch extends Component {
   loadData = async () => {
     const namaProduk = this.props.navigation.getParam("namaCategory");
     let data = await Axios.get(
-      `http://0cdf877f1c42.ngrok.io /api/Client/category/s?CategoryName=${namaProduk}`
+      `http://0cdf877f1c42.ngrok.io/api/Client/category/s?CategoryName=${namaProduk}`
     );
 
     this.setState({
@@ -64,7 +64,7 @@ export default class DetailSearch extends Component {
                   nameProduct={data.ProductName}
                   prices={data.Cost}
                   image={{
-                    uri: `http://0cdf877f1c42.ngrok.io /Resources/Products/${data.ImageUrl}`,
+                    uri: `http://0cdf877f1c42.ngrok.io/Resources/Products/${data.ImageUrl}`,
                   }}
                 />
               </View>

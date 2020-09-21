@@ -19,7 +19,7 @@ export class LoadingScreen extends Component {
 
   loadDeal = async () => {
     let data = await Axios.get(
-      "http://0cdf877f1c42.ngrok.io /api/Client/opening"
+      "http://0cdf877f1c42.ngrok.io/api/Client/opening"
     );
     this.setState({
       dataList: data.data,

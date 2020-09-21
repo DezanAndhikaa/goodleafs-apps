@@ -10,13 +10,6 @@ export default class Search extends Component {
         <Text style={style.title}> Cari Produk </Text>
 
         <TextInput style={style.textInput} placeholder="Ketik nama produk..." />
-        <Image
-          source={GroupImage}
-          style={{
-            width: "90%",
-            resizeMode: "contain",
-          }}
-        />
 
         <TouchableOpacity
           style={style.pesanProdukButton}
