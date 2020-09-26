@@ -7,7 +7,7 @@ import Apel from "../../../assets/img/products/Apel.png";
 import { ScrollView } from "react-native-gesture-handler";
 import * as SQLite from "expo-sqlite";
 
-const db = SQLite.openDatabase("local.db");
+const db = SQLite.openDatabase("dev6.db");
 
 export default class Cart extends Component {
   state = {

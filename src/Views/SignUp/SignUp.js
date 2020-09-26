@@ -26,7 +26,7 @@ const SendSignUp = (name, email, pass, reconf, navigation, setLoading) => {
     setLoading(true);
 
     axios
-      .post("http://0cdf877f1c42.ngrok.io/api/Client/register", UserRegister)
+      .post("https://3a78a3e1bf39.ngrok.io/api/Client/register", UserRegister)
       .then((res) => {
         alert("Berhasil mendaftarkan akun!");
         navigation.replace("SignIn");

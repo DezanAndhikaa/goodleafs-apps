@@ -33,14 +33,33 @@ export default class DetailSearch extends Component {
   };
 
   loadData = async () => {
-    const namaProduk = this.props.navigation.getParam("namaCategory");
-    let data = await Axios.get(
-      `http://0cdf877f1c42.ngrok.io/api/Client/category/s?CategoryName=${namaProduk}`
-    );
+    if (this.props.navigation.getParam("pencarian") == "Kategori") {
+      const namaProduk = this.props.navigation.getParam("namaCategory");
+      let data = await Axios.get(
+        `https://3a78a3e1bf39.ngrok.io/api/Client/category/s?CategoryName=${namaProduk}`
+      );
 
-    this.setState({
-      dataList: data.data,
-    });
+      this.setState({
+        dataList: data.data,
+      });
+    } else {
+      const namaProduk = this.props.navigation.getParam("keyword");
+      let builderCategory = "";
+      if (this.props.navigation.getParam("listCategory").length > 0) {
+        this.props.navigation.getParam("listCategory").map((data) => {
+          builderCategory += `&CategoryName=${data}`;
+        });
+      } else {
+        builderCategory = `&CategoryName=""`;
+      }
+      let data = await Axios.get(
+        `https://0cdf877f1c42.ngrok.io/api/Client/product/all/n?ProductName=${namaProduk}${builderCategory}`
+      );
+
+      this.setState({
+        dataList: data.data,
+      });
+    }
   };
 
   componentDidMount() {
@@ -58,16 +77,31 @@ export default class DetailSearch extends Component {
           </Text>
           <View style={style.wrapperBody}>
             {this.state.dataList.map((data, index) => (
-              <View style={style.styleItem} key={index}>
+              <TouchableOpacity
+                style={style.styleItem}
+                key={index}
+                onPress={() =>
+                  this.props.navigation.navigate("DetailProduct", {
+                    image: {
+                      uri: `https://3a78a3e1bf39.ngrok.io/Resources/Products/${data.ImageUrl}`,
+                    },
+                    baseColor: data.BaseColor,
+                    description: data.Description,
+                    idProduct: data.IdProduct,
+                    price: data.Cost,
+                    productName: data.ProductName,
+                    productCategory: data.CategoryName,
+                  })
+                }>
                 <ProductCard
                   color={data.BaseColor}
                   nameProduct={data.ProductName}
                   prices={data.Cost}
                   image={{
-                    uri: `http://0cdf877f1c42.ngrok.io/Resources/Products/${data.ImageUrl}`,
+                    uri: `https://3a78a3e1bf39.ngrok.io/Resources/Products/${data.ImageUrl}`,
                   }}
                 />
-              </View>
+              </TouchableOpacity>
             ))}
           </View>
         </ScrollView>

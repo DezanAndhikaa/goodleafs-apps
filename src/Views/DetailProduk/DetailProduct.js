@@ -9,8 +9,10 @@ import ReviewCard from "../../Components/ReviewCard/ReviewCard";
 import ProductCard from "../../Components/ProductCard/ProductCard";
 var NumberFormat = require("react-number-format");
 import * as SQLite from "expo-sqlite";
+import Axios from "axios";
+import { Animated } from "react-native";
 
-const db = SQLite.openDatabase("local.db");
+const db = SQLite.openDatabase("dev6.db");
 
 const Toast = ({ visible, message }) => {
   if (visible) {
@@ -29,11 +31,13 @@ const Toast = ({ visible, message }) => {
 export default class DetailProduct extends Component {
   constructor(props) {
     super(props);
+    this.scroll = null;
     this.state = {
       qty: 1,
       isBookmarked: false,
       visibleToast: false,
       toastMessage: "",
+      dataList: [],
     };
   }
 
@@ -58,16 +62,13 @@ export default class DetailProduct extends Component {
           "delete from bookmark where idProduct=?",
           [this.props.navigation.getParam("idProduct")],
           (err, { rows }) => {
-            console.log("Deleted");
             this.setState({
               isBookmarked: false,
               visibleToast: true,
               toastMessage: "Product dihapus dari wishlist",
             });
           },
-          (_, error) => {
-            console.log(error);
-          }
+          (_, error) => {}
         );
       });
     } else {
@@ -76,16 +77,13 @@ export default class DetailProduct extends Component {
           "insert into bookmark values(?)",
           [this.props.navigation.getParam("idProduct")],
           (err, { rows }) => {
-            console.log("Added");
             this.checkBookmark();
             this.setState({
               visibleToast: true,
               toastMessage: "Product ditambahkan di wishlist",
             });
           },
-          (_, error) => {
-            console.log(error);
-          }
+          (_, error) => {}
         );
       });
     }
@@ -107,8 +105,25 @@ export default class DetailProduct extends Component {
     });
   };
 
+  loadData = async () => {
+    const namaCategory = this.props.navigation.getParam("productCategory");
+    let data = await Axios.get(
+      `https://3a78a3e1bf39.ngrok.io/api/Client/category/s?CategoryName=${namaCategory}`
+    );
+
+    this.setState({
+      dataList: data.data,
+    });
+  };
+
+  componentDidUpdate() {
+    this.scroll.scrollTo({ x: 0, y: 0, animated: true });
+  }
+
   componentDidMount() {
     this.checkBookmark();
+
+    this.loadData();
 
     db.transaction((tx) => {
       tx.executeSql("create table if not exists bookmark (idProduct text)");
@@ -119,15 +134,46 @@ export default class DetailProduct extends Component {
         "select * from cart",
         [],
         (_, { rows }) => {},
-        (_, err) => {
-          console.log(err);
-        }
+        (_, err) => {}
       );
     });
   }
 
+  renderData = () => {
+    if (this.state.dataList.length != 0) {
+      return this.state.dataList.map((data, index) => {
+        if (data.ProductName != this.props.navigation.getParam("productName"))
+          return (
+            <TouchableOpacity
+              key={index}
+              onPress={() => {
+                this.props.navigation.navigate("DetailProduct", {
+                  image: {
+                    uri: `https://3a78a3e1bf39.ngrok.io/Resources/Products/${data.ImageUrl}`,
+                  },
+                  baseColor: data.BaseColor,
+                  description: data.Description,
+                  idProduct: data.IdProduct,
+                  price: data.Cost,
+                  productName: data.ProductName,
+                  productCategory: data.CategoryName,
+                });
+              }}>
+              <ProductCard
+                color={data.BaseColor}
+                nameProduct={data.ProductName}
+                prices={data.Cost}
+                image={{
+                  uri: `https://3a78a3e1bf39.ngrok.io/Resources/Products/${data.ImageUrl}`,
+                }}
+              />
+            </TouchableOpacity>
+          );
+      });
+    }
+  };
+
   addToCart = () => {
-    console.log("Pressed");
     let totalData = 0;
 
     db.transaction((tx) => {
@@ -155,16 +201,12 @@ export default class DetailProduct extends Component {
                 () => {
                   this.props.navigation.navigate("Cart");
                 },
-                (_, err) => {
-                  console.log(err);
-                }
+                (_, err) => {}
               );
             });
           }
         },
-        (_, err) => {
-          console.log(err);
-        }
+        (_, err) => {}
       );
     });
   };
@@ -172,7 +214,10 @@ export default class DetailProduct extends Component {
   render() {
     return (
       <View style={style.wrapper}>
-        <ScrollView>
+        <ScrollView
+          ref={(c) => {
+            this.scroll = c;
+          }}>
           <View
             style={[
               style.wrapperPhoto,
@@ -276,52 +321,15 @@ export default class DetailProduct extends Component {
               <Text style={style.ulasanTitle}>Rekomendasi Produk</Text>
               <Text style={style.lihatSemuaTitle}>Lihat Semua</Text>
             </View>
+            <ScrollView horizontal={true}>
+              <View style={style.wrapperRecomendation}>
+                {this.renderData()}
+              </View>
+            </ScrollView>
           </View>
 
           <ScrollView horizontal={true}>
-            <View style={style.wrapperRecomendation}>
-              <ProductCard
-                color="#FFBF2E"
-                nameProduct="Mangga Manis"
-                prices="4000"
-                image={this.props.navigation.getParam("image")}
-              />
-
-              <ProductCard
-                color="#869428"
-                nameProduct="Apel Mantap Jiwa"
-                prices="4000"
-                image={this.props.navigation.getParam("image")}
-              />
-
-              <ProductCard
-                color="#FFBF2E"
-                nameProduct="Mangga Manis"
-                prices="4000"
-                image={this.props.navigation.getParam("image")}
-              />
-
-              <ProductCard
-                color="#869428"
-                nameProduct="Apel Mantap Jiwa"
-                prices="4000"
-                image={this.props.navigation.getParam("image")}
-              />
-
-              <ProductCard
-                color="#FFBF2E"
-                nameProduct="Mangga Manis"
-                prices="4000"
-                image={this.props.navigation.getParam("image")}
-              />
-
-              <ProductCard
-                color="#869428"
-                nameProduct="Apel Mantap Jiwa"
-                prices="4000"
-                image={this.props.navigation.getParam("image")}
-              />
-            </View>
+            <View style={style.wrapperRecomendation}></View>
           </ScrollView>
         </ScrollView>
       </View>
@@ -523,7 +531,7 @@ const style = StyleSheet.create({
 
   wrapperRecomendation: {
     flexDirection: "row",
-    paddingLeft: 30,
+    paddingLeft: 10,
     marginBottom: 30,
   },
 

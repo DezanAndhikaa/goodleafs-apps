@@ -1,20 +1,67 @@
 import React, { Component } from "react";
 import { Text, View, StyleSheet, Image, TouchableOpacity } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
-import GroupImage from "../../../assets/img/groups.png";
+import BubbleCategorys from "../../Components/BubbleCategory/BubbleCategorys";
 
 export default class Search extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      namaProduk: "",
+      activeButton: false,
+      listCategory: [],
+    };
+  }
+
+  renderListCategory = () => {
+    return this.props.navigation.getParam("data").map((data, index) => {
+      return (
+        <View key={index}>
+          <BubbleCategorys
+            nama={data.CategoryName}
+            pushData={() => {
+              var joined = this.state.listCategory.concat(data.CategoryName);
+              this.setState({ listCategory: joined });
+            }}
+            deleteData={() => {
+              var array = [...this.state.listCategory];
+              var lastData = array.indexOf(data.CategoryName);
+              if (lastData !== -1) {
+                array.splice(lastData, 1);
+                this.setState({ listCategory: array });
+              }
+            }}
+          />
+        </View>
+      );
+    });
+  };
+
   render() {
     return (
       <View style={style.body}>
         <Text style={style.title}> Cari Produk </Text>
 
-        <TextInput style={style.textInput} placeholder="Ketik nama produk..." />
+        <TextInput
+          style={style.textInput}
+          onChange={(e) => {
+            this.setState({ namaProduk: e.nativeEvent.text });
+          }}
+          placeholder="Ketik nama produk..."
+        />
+        <View style={{ flexDirection: "row", flex: 1, flexWrap: "wrap" }}>
+          {this.renderListCategory()}
+        </View>
 
         <TouchableOpacity
           style={style.pesanProdukButton}
           onPress={() => {
-            this.props.navigation.navigate("DetailSearch");
+            this.props.navigation.navigate("DetailSearch", {
+              listCategory: this.state.listCategory,
+              keyword: this.state.namaProduk,
+              pencarian: "Produk",
+            });
           }}>
           <Text style={style.wordPesanProduk}>Cari Produk</Text>
         </TouchableOpacity>
@@ -52,6 +99,27 @@ const style = StyleSheet.create({
     borderRadius: 10,
     padding: 10,
     justifyContent: "center",
+  },
+
+  wrapperBuble: {
+    borderColor: "#20232a",
+    padding: 10,
+    borderRadius: 20,
+    borderWidth: 1,
+    alignSelf: "baseline",
+    marginRight: 10,
+    marginBottom: 10,
+  },
+
+  wrapperBubleClicked: {
+    color: "#FFF",
+    backgroundColor: "#20232a",
+    padding: 10,
+    borderRadius: 20,
+    borderWidth: 1,
+    alignSelf: "baseline",
+    marginRight: 10,
+    marginBottom: 10,
   },
 
   wordPesanProduk: {

@@ -15,7 +15,7 @@ import Kategori from "../../Components/Kategori/Kategori";
 import Navbar from "../../Components/Navbar/Navbar";
 import * as SQLite from "expo-sqlite";
 
-const db = SQLite.openDatabase("local.db");
+const db = SQLite.openDatabase("dev6.db");
 
 const WelcomeWord = (words, second) => {
   return (
@@ -43,19 +43,20 @@ export default class MainMenu extends Component {
           onPress={() =>
             this.props.navigation.navigate("DetailProduct", {
               image: {
-                uri: `http://0cdf877f1c42.ngrok.io/Resources/Products/${data.ImageUrl}`,
+                uri: `https://3a78a3e1bf39.ngrok.io/Resources/Products/${data.ImageUrl}`,
               },
               baseColor: data.BaseColor,
               description: data.Description,
               idProduct: data.IdProduct,
               price: data.Cost,
               productName: data.ProductName,
+              productCategory: data.CategoryName,
             })
           }>
           <ProductCard
             color={data.BaseColor}
             image={{
-              uri: `http://0cdf877f1c42.ngrok.io/Resources/Products/${data.ImageUrl}`,
+              uri: `https://3a78a3e1bf39.ngrok.io/Resources/Products/${data.ImageUrl}`,
             }}
             nameProduct={data.ProductName}
             prices={data.Cost}
@@ -80,7 +81,7 @@ export default class MainMenu extends Component {
             }}>
             <Kategori
               image={{
-                uri: `http://0cdf877f1c42.ngrok.io/Resources/Category/${data.ImageUrl}`,
+                uri: `https://3a78a3e1bf39.ngrok.io/Resources/Category/${data.ImageUrl}`,
               }}
               title={data.CategoryName}
             />
@@ -99,16 +100,30 @@ export default class MainMenu extends Component {
             <View style={style.containerProduct}>
               {data.Products.map((data, index) => {
                 return (
-                  <View key={index}>
+                  <TouchableOpacity
+                    key={index}
+                    onPress={() =>
+                      this.props.navigation.navigate("DetailProduct", {
+                        image: {
+                          uri: `https://3a78a3e1bf39.ngrok.io/Resources/Products/${data.ImageUrl}`,
+                        },
+                        baseColor: data.BaseColor,
+                        description: data.Description,
+                        idProduct: data.IdProduct,
+                        price: data.Cost,
+                        productName: data.ProductName,
+                        productCategory: data.CategoryName,
+                      })
+                    }>
                     <ProductCard
                       color={data.BaseColor}
                       image={{
-                        uri: `http://0cdf877f1c42.ngrok.io/Resources/Products/${data.ImageUrl}`,
+                        uri: `https://3a78a3e1bf39.ngrok.io/Resources/Products/${data.ImageUrl}`,
                       }}
                       nameProduct={data.ProductName}
                       prices={data.Cost}
                     />
-                  </View>
+                  </TouchableOpacity>
                 );
               })}
             </View>
@@ -132,7 +147,7 @@ export default class MainMenu extends Component {
             }}>
             <Kategori
               image={{
-                uri: `http://0cdf877f1c42.ngrok.io/Resources/Category/${data.ImageUrl}`,
+                uri: `https://3a78a3e1bf39.ngrok.io/Resources/Category/${data.ImageUrl}`,
               }}
               title={data.CategoryName}
             />
@@ -146,16 +161,6 @@ export default class MainMenu extends Component {
     super(props);
   }
   componentDidMount() {
-    db.transaction((tx) => {
-      tx.executeSql("select * from user", [], (_, { rows }) => {
-        const data = rows._array;
-        this.setState({
-          name: data[0].name,
-          email: data[0].email,
-        });
-      });
-    });
-
     this.setState({
       dataDeal: this.props.navigation.getParam("data").DealoftheDay,
       dataCategory: this.props.navigation.getParam("data").Category,
@@ -174,7 +179,10 @@ export default class MainMenu extends Component {
               hidden={false}
             />
 
-            <MainBar navigation={this.props.navigation} />
+            <MainBar
+              category={this.state.dataCategory}
+              navigation={this.props.navigation}
+            />
             {WelcomeWord("Buah dan Sayuran Segar", "Setiap Hari")}
             <Image source={Banner} style={style.bannerImage} />
             <Text style={style.headerWord}> Deal of the day! </Text>
@@ -202,10 +210,7 @@ export default class MainMenu extends Component {
           </View>
         </ScrollView>
 
-        <Navbar
-          navigation={this.props.navigation}
-          accountName={this.state.name}
-        />
+        <Navbar navigation={this.props.navigation} />
       </View>
     );
   }
@@ -259,7 +264,7 @@ const style = StyleSheet.create({
     justifyContent: "space-between",
     paddingLeft: 10,
     backgroundColor: "#FFF",
-    paddingBottom: 30,
+    paddingBottom: 20,
   },
 
   scrollParent: {

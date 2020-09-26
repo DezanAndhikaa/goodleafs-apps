@@ -17,7 +17,7 @@ import * as Facebook from "expo-facebook";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import * as SQLite from "expo-sqlite";
 
-const db = SQLite.openDatabase("local.db");
+const db = SQLite.openDatabase("dev6.db");
 
 const Login = ({ navigation } = props) => {
   const [email, setEmail] = useState("");
@@ -31,12 +31,12 @@ const Login = ({ navigation } = props) => {
       Email: email,
       Password: password,
     };
-    Axios.post("http://0cdf877f1c42.ngrok.io/api/Client/login", payload)
+    Axios.post("https://3a78a3e1bf39.ngrok.io/api/Client/login", payload)
       .then((e) => {
         db.transaction((tx) => {
-          tx.executeSql("insert into user values(?,?)", [email, password]);
+          tx.executeSql("insert into user values(?,?)", [email, e.data]);
         });
-        navigation.replace("MainMenu");
+        navigation.replace("LoadingScreen");
       })
       .catch(() => {
         alert("Username / password salah");

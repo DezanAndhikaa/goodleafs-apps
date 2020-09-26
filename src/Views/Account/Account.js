@@ -4,10 +4,10 @@ import Headers from "../../Components/Header/Header";
 import Avatar from "../../../assets/img/default-avatar.png";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import Navbar from "../../Components/Navbar/Navbar";
-import VerifiedLogo from "../../../assets/img/verified.png";
+import VerifiedLogo from "../../../assets/img/cross.png";
 import * as SQLite from "expo-sqlite";
 
-const db = SQLite.openDatabase("local.db");
+const db = SQLite.openDatabase("dev6.db");
 
 export default class Account extends Component {
   state = {
@@ -17,13 +17,28 @@ export default class Account extends Component {
 
   componentDidMount() {
     db.transaction((tx) => {
-      tx.executeSql("select * from user", [], (_, { rows }) => {
-        const data = rows._array;
-        this.setState({
-          name: data[0].name,
-          email: data[0].email,
-        });
-      });
+      tx.executeSql("create table if not exists user (email text, name text)");
+      tx.executeSql("create table if not exists bookmark (idProduct text)");
+      tx.executeSql(
+        "select * from user",
+        [],
+        (_, { rows }) => {
+          if (rows.length > 0) {
+            const data = rows._array;
+            this.setState({
+              name: data[0].name,
+              email: data[0].email,
+            });
+          } else {
+            this.props.navigation.replace("SignIn", {
+              data: this.state.dataList,
+            });
+          }
+        },
+        (_) => {
+          this.props.navigation.navigate("Login");
+        }
+      );
     });
   }
 
@@ -44,9 +59,7 @@ export default class Account extends Component {
             <Image source={Avatar} style={style.image} />
 
             <View style={style.accountDetailWrapper}>
-              <Text style={style.namaAkun}>
-                {this.props.navigation.getParam("namaAccount")}
-              </Text>
+              <Text style={style.namaAkun}>{this.state.name}</Text>
 
               <Text style={style.emailAkun}>{this.state.email}</Text>
             </View>
@@ -65,24 +78,24 @@ export default class Account extends Component {
               marginBottom: -50,
             }}>
             <View style={style.wrapperStatus}>
-              <View style={style.styleBox}>
-                <Text style={style.qty}>42</Text>
-                <Text style={style.qtyOrder}>Pesanan Diterima</Text>
-              </View>
               <View style={style.styleBox2}>
-                <Text style={style.qty}>12</Text>
+                <Text style={style.qty}>0</Text>
                 <Text style={style.qtyOrder}>Pesanan Diproses</Text>
               </View>
               <View style={style.styleBox3}>
-                <Text style={style.qty}>2</Text>
+                <Text style={style.qty}>0</Text>
                 <Text style={style.qtyOrder}>Pesanan Dikirim</Text>
+              </View>
+              <View style={style.styleBox}>
+                <Text style={style.qty}>0</Text>
+                <Text style={style.qtyOrder}>Pesanan Diterima</Text>
               </View>
             </View>
           </TouchableOpacity>
 
           <View style={style.verifiedAccount}>
             <Image source={VerifiedLogo} />
-            <Text style={style.verifWord}>Akun anda sudah terverifikasi!</Text>
+            <Text style={style.verifWord}>Akun anda belum terverifikasi!</Text>
           </View>
         </View>
         <Navbar navigation={this.props.navigation} />
@@ -111,6 +124,7 @@ const style = StyleSheet.create({
     borderRadius: 10,
     alignItems: "center",
     justifyContent: "center",
+    marginLeft: 10,
   },
 
   styleBox2: {
@@ -221,7 +235,7 @@ const style = StyleSheet.create({
     justifyContent: "center",
     height: 80,
     borderRadius: 15,
-    backgroundColor: "#688860",
+    backgroundColor: "#CE5C5C",
     marginTop: 100,
   },
 

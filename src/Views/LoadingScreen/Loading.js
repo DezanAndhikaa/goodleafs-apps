@@ -6,7 +6,7 @@ import * as Font from "expo-font";
 import * as SQLite from "expo-sqlite";
 import Axios from "axios";
 
-const db = SQLite.openDatabase("local.db");
+const db = SQLite.openDatabase("dev6.db");
 
 export class LoadingScreen extends Component {
   constructor(props) {
@@ -17,13 +17,14 @@ export class LoadingScreen extends Component {
     };
   }
 
-  loadDeal = async () => {
-    let data = await Axios.get(
-      "http://0cdf877f1c42.ngrok.io/api/Client/opening"
+  loadDeal = () => {
+    Axios.get("https://3a78a3e1bf39.ngrok.io/api/Client/opening").then(
+      (data) => {
+        this.setState({
+          dataList: data.data,
+        });
+      }
     );
-    this.setState({
-      dataList: data.data,
-    });
   };
 
   componentDidMount() {
@@ -45,20 +46,15 @@ export class LoadingScreen extends Component {
             "create table if not exists user (email text, name text)"
           );
           tx.executeSql("create table if not exists bookmark (idProduct text)");
-          tx.executeSql("select * from user", [], (_, { rows }) => {
-            if (rows.length > 0) {
-              setTimeout(
-                () =>
-                  this.props.navigation.replace("MainMenu", {
-                    data: this.state.dataList,
-                  }),
-                3000
-              );
-            } else {
-              setTimeout(() => this.props.navigation.replace("SignIn"), 3000);
-            }
-          });
         });
+
+        setTimeout(
+          () =>
+            this.props.navigation.replace("MainMenu", {
+              data: this.state.dataList,
+            }),
+          3000
+        );
       }
     );
   }
